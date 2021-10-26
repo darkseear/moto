@@ -70,16 +70,16 @@ function Footer() {
               <div className="footer__menu">
                     <ul>
                         <li>
-                            Главная
+                            <a href="">Главная</a>
                         </li>
                         <li>
-                            Сервис
+                            <a href="">Сервис</a>
                         </li>
                         <li>
-                            Наш музей
+                            <a href="">Наш музей</a>
                         </li>
                         <li>
-                            Контакты
+                            <a href="">Контакты</a>
                         </li>
                     </ul>
               </div>
