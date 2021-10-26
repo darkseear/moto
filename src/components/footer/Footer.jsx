@@ -46,7 +46,6 @@ function Footer() {
                 <div className="contact-footer__phone-one">
                     <p>
                     +7 (4862) 78-27-88
-
                     </p>
                 </div>
                 <div className="contact-footer__phone-two">
