@@ -83,6 +83,20 @@ header {
     }
 }
 
+.adress_infoblock-left_adress{
+    background: url('../images/place.png') no-repeat;
+    background-size: contain;
+    width: 35px;
+    height: 35px;
+}
+
+.adress_infoblock-right_adress{
+    background: url('../images/place.png') no-repeat;
+    background-size: contain;
+    width: 35px;
+    height: 35px;
+}
+
 .phone_number-oneLeft{
     width: 100%;
     display: flex;
@@ -95,6 +109,41 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+}
+.oneLeft_number-phone_phone{
+    background: url('../images/phone.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 35px;
+    height: 35px;
+    margin-right: 18px;
+}
+
+.twoLeft_number-phone_phone{
+    background: url('../images//phone.png');
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 18px;
+}
+
+.oneRight_number-phone_phone{
+    background: url('../images/phone.png');
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 18px;
+}
+
+.twoRight_number-phone_phone{
+    background: url('../images//phone.png');
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 18px;
 }
 
 .phone_number-oneRight{
@@ -138,6 +187,7 @@ header {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    text-transform: uppercase;
 }
 
 .left_categoryBlock {

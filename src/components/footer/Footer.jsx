@@ -3,6 +3,7 @@ import React from 'react'
 function Footer() {
     return (
         <footer>
+            <div className="footer-container">
              <div className="footer__title-shop">
                  <div className="title-footer__title">
                      <p>
@@ -15,8 +16,8 @@ function Footer() {
                     </p>
                  </div>
                  <div className="title-footer__socnetwork">
-                     <div style={{ width:'40px', height:'40px' , background: 'white'}}></div>
-                     <div style={{ width:'40px', height:'40px' , background: 'white'}}></div>
+                     <div className="socnetwork-footer__instagram" ></div>
+                     <div className="socnetwork-footer__vk" ></div>
                  </div>
              </div>
              <div className="footer__contact-one">
@@ -62,7 +63,7 @@ function Footer() {
                 </div>
                   <div className="email-footer__email">
                       <p>
-                        orel-moto@bk.ru
+                            <a href="email:orel-moto@bk.ru">orel-moto@bk.ru</a>
                       </p>
                   </div>
               </div>
@@ -82,6 +83,7 @@ function Footer() {
                         </li>
                     </ul>
               </div>
+            </div>
         </footer>
     )
 }

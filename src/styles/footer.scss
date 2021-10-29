@@ -7,11 +7,38 @@ footer{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     display: flex;
     color: white;
+    justify-content: center;
+}
+
+.footer-container{
+    font-size: 18px;
+    display: flex;
+    width: 1920px;
+    min-width: 320px;
+    height: 100%;
+    padding-top: 62px;
+    padding-left: 120px;
+    padding-right: 120px;
+    justify-content: space-between;
 }
 
 .footer {
 
     &__menu {
+
+        & ul li{
+            list-style: none;
+            font-family: Montserrat;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 31px;
+        }
+
+        & ul li a{
+            color:white;
+            text-decoration: none;
+        }
 
     }
 
@@ -35,39 +62,104 @@ footer{
 
 .contact-footer{
     &__adress{
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
+        text-transform: uppercase;
 
     }
 
     &__phone-one{
-
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
+        text-transform: uppercase;
     }
 
     &__phone-two{
-
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
+        text-transform: uppercase;
     }
 }
 
 .title-footer{
     &__title{
-
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
+        text-transform: uppercase;
     }
 
     &__yahr{
-
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
+        text-transform: uppercase;
     }
 
     &__socnetwork{
-
+        margin-top: 27px;
+        display: flex;
+        width: 120px;
+        justify-content: space-between;
     }
 
 }
 
 .email-footer{
     &__title{
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
 
+        
     }
 
     &__email{
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 45px;
+        height: 35px;
         
+        & p a{
+            color: white;
+            cursor: pointer;
+        }
+    }
+}
+
+.socnetwork-footer{
+    &__instagram{
+        width:40px;
+        height:40px;
+        background: url('../images/instagram.svg');
+    }
+
+    &__vk{
+        width:40px;
+        height:40px;
+        background: url('../images/VK.svg');
     }
 }

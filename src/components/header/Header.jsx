@@ -6,20 +6,29 @@ function Header() {
             <div className="header_top">
                 <div className="left_infoblock">
                     <div className="left_infoblock-adress">
-                        <p><span>t</span>
+                        <div className="adress_infoblock-left_adress"></div>
+                        <div>
+                            <p>
                             г. Орёл, Московское шоссеб д.95 
-                        </p>
+                            </p>
+                        </div>
                     </div>
                     <div className="left_infoblock-phone">
                     <div className="phone_number-oneLeft">
-                            <p><span>t</span>
-                                +7(4862) 78-27-88
-                            </p>
+                            <div className="oneLeft_number-phone_phone"></div>
+                            <div>
+                                <p>
+                                    +7(4862) 78-27-88
+                                </p>
+                            </div>
                         </div>
                         <div className="phone_number-twoLeft">
-                            <p><span>t</span>
-                                +7(962) 475-27-88
-                            </p>
+                            <div className="twoLeft_number-phone_phone"></div>
+                            <div>
+                                <p>
+                                    +7(962) 475-27-88
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,20 +37,29 @@ function Header() {
                 </div>
                 <div className="right_infoblock">
                     <div className="right_infoblock-adress">
-                        <p><span>t</span>
-                            г. Орёл, ул. МОПРА, д.7
-                        </p>
+                        <div className="adress_infoblock-right_adress"></div>
+                        <div>
+                            <p>
+                                г. Орёл, ул. МОПРА, д.7
+                            </p>
+                        </div>
                     </div>
                     <div className="right_infoblock-phone">
                         <div className="phone_number-oneRight">
-                            <p><span>t</span>
-                                +7(4862) 78-27-88
-                            </p>
+                            <div className="oneRight_number-phone_phone"></div>
+                            <div>
+                                <p>
+                                    +7(4862) 78-27-88
+                                </p>
+                            </div>
                         </div>
                         <div className="phone_number-twoRight">
-                            <p><span>t</span>
-                                +7(962) 475-27-88
-                            </p>
+                            <div className="twoRight_number-phone_phone"></div>
+                            <div>
+                                <p>
+                                    +7(962) 475-27-88
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,15 @@ time, mark, audio, video {
     box-sizing: border-box;
 }
 
+@font-face {
+    // название шрифта(чтобы не запутаться лучше указать название папки со шрифтом) 
+    font-family: "Montserrat"; 
+    // адрес шрифта и тип 
+    src: url("../other/Montserrat/Montserrat-Light.ttf"); 
+    font-style: normal; 
+    font-weight: normal; 
+} 
+
 body{
     min-height: 1080px;
     // padding: 0px 127px;
@@ -81,3 +90,4 @@ body{
 @import './header.scss';
 @import './main.scss';
 @import './footer.scss';
+@import './content_body.scss';
