@@ -1,9 +1,10 @@
 import React from 'react'
+import News from '../../web_components_kit/news/News'
 
 function Home() {
     return (
         <div>
-            home
+            <News/>
         </div>
     )
 }
