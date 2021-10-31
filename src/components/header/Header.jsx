@@ -70,24 +70,24 @@ function Header() {
                 <div className="category_container">
                         <div className="left_categoryBlock">
                             <div className="title_category-left">
-                                <p>Главная</p>
+                            <Link to={"/"}> Главная</Link>
                             </div>
                             <div className="title_category-left">
-                                <p>Сурвис</p>
+                            <Link to={"/service"}> Сервис</Link>
                             </div>
                             <div className="title_category-left">
-                                <p>Наш музей</p>
+                            <Link to={"/museum"}> Наш музей</Link>
                             </div>
                         </div>
                         <div className="right_categoryBlock">
                             <div className="title_category-right">
-                                <p>Контакты</p>
+                            <Link to={"/contacts"}> Контакты</Link>
                             </div>
                             <div className="title_category-right">
-                                <Link path={"/login "}> Вход</Link>
+                                <Link to={"/login"}> Вход</Link>
                             </div>
                             <div className="title_category-right">
-                                <p>Корзина</p>
+                            <Link to={"/cart"}> Корзина</Link>
                             </div>
                         </div>
                 </div>
