@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
     return (
@@ -69,24 +70,24 @@ function Header() {
                 <div className="category_container">
                         <div className="left_categoryBlock">
                             <div className="title_category-left">
-                                <p>НазваниеL</p>
+                                <p>Главная</p>
                             </div>
                             <div className="title_category-left">
-                                <p>НазваниеL</p>
+                                <p>Сурвис</p>
                             </div>
                             <div className="title_category-left">
-                                <p>НазваниеL</p>
+                                <p>Наш музей</p>
                             </div>
                         </div>
                         <div className="right_categoryBlock">
                             <div className="title_category-right">
-                                <p>НазваниеR</p>
+                                <p>Контакты</p>
                             </div>
                             <div className="title_category-right">
-                                <p>НазваниеR</p>
+                                <Link path={"/login "}> Вход</Link>
                             </div>
                             <div className="title_category-right">
-                                <p>НазваниеR</p>
+                                <p>Корзина</p>
                             </div>
                         </div>
                 </div>
