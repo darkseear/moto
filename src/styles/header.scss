@@ -9,6 +9,10 @@ header {
     // padding-right: 50px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .header{
     &_top {
         height: 171px;
@@ -186,7 +190,7 @@ header {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     text-transform: uppercase;
 }
 
