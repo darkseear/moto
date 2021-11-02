@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Header() {
+function Header({ isLogin }) {
     return (
         <header>
             <div className="header_top">
@@ -84,7 +84,10 @@ function Header() {
                             <Link to={"/contacts"}> Контакты</Link>
                             </div>
                             <div className="title_category-right">
-                                <Link to={"/login"}> Вход</Link>
+                                {isLogin ? 
+                                    <Link to={"/login"}> Профиль</Link>
+                                    :<Link to={"/login"}> Вход</Link>
+                                }   
                             </div>
                             <div className="title_category-right">
                             <Link to={"/cart"}> Корзина</Link>

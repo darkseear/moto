@@ -1,10 +1,10 @@
 import React from 'react'
 import ContentBody from '../content_body/ContentBody'
 
-function Main() {
+function Main({ isLogin, setIsLogin }) {
     return (
         <main>
-           <ContentBody />
+           <ContentBody isLogin={isLogin} setIsLogin={setIsLogin}/>
         </main>
     )
 }

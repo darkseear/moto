@@ -35,7 +35,7 @@ time, mark, audio, video {
 } 
 
 body{
-    min-height: 1080px;
+    min-height: 768px;
     // padding: 0px 127px;
     // max-width: 1920px;
     margin: 0 auto;
@@ -43,6 +43,19 @@ body{
     flex-direction: column;  
     font-size: 25px;
     font-family:'Courier New', Courier, monospace;
+}
+
+
+@media screen and ( max-width: 1920px) {
+    body{
+        zoom: 75%;
+    }
+}
+
+@media screen and ( max-width: 1279px) {
+    body{
+        zoom: 50%;
+    }
 }
 
 #root{
@@ -96,4 +109,5 @@ body{
 @import './recent_arrivals.scss';
 @import './part.scss';
 @import './login.scss';
+@import './login_form.scss';
 

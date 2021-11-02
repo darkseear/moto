@@ -9,7 +9,7 @@ import Login from '../pages/login/Login'
 import Museum from '../pages/museum/Museum'
 import Service from '../pages/service/Service'
 
-function ContentBody() {
+function ContentBody({ isLogin, setIsLogin }) {
     return (
         <>
             <Switch>
@@ -26,7 +26,7 @@ function ContentBody() {
                     <Catalog/>
                 </Route>
                 <Route path="/login">
-                    <Login/>
+                    <Login setIsLogin={ setIsLogin } isLogin={ isLogin }/>
                 </Route> 
                 <Route path="/service">
                     <Service/>

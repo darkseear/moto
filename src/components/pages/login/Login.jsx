@@ -1,14 +1,17 @@
 import React from 'react'
+import LoginForm from '../../web_components_kit/login_form/LoginForm'
 
-function Login() {
+function Login({ isLogin, setIsLogin }) {
 
     const [state, setState] = React.useState()
 
     return (
         <div className="login_container">
-            <div className="login_form">
 
-            </div>
+            {
+                !isLogin ? <LoginForm setIsLogin={ setIsLogin } /> : "Profile"
+            }
+            
         </div>
     )
 }
