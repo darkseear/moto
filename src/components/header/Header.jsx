@@ -10,7 +10,7 @@ function Header({ isLogin }) {
                         <div className="adress_infoblock-left_adress"></div>
                         <div>
                             <p>
-                            г. Орёл, Московское шоссеб д.95 
+                            г. Орёл, Московское шоссе д.95 
                             </p>
                         </div>
                     </div>

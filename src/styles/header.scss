@@ -21,7 +21,11 @@ a {
         // padding-left: 120px;
         // padding-right: 120px;
         justify-content: space-between;
-       
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 26px;
+        text-transform: uppercase;
     }
     &_bottom {
         // position: absolute;
@@ -228,4 +232,12 @@ a {
     align-items: center;
     width: 100%;
     max-width: 200px;
+}
+
+.title_category-left a{
+    color: black;
+}
+
+.title_category-right a{
+    color: black;
 }
