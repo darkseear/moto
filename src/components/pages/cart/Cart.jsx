@@ -1,12 +1,21 @@
 import React from 'react'
+import Categories from '../../web_components_kit/categories/Categories'
 import PageTitle from '../../web_components_kit/page_title/PageTitle'
 
 function Cart() {
     return (
-        <div>
+        <>
             <PageTitle  title={"Корзина"} />
-            Cart
-        </div>
+            <div>
+                <div style={{ float:'left', marginRight:'10px'}}>
+                        <Categories />
+                </div>
+                <div>
+                    
+                    Cart
+                </div>
+            </div>
+        </>
     )
 }
 

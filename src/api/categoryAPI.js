@@ -5,7 +5,7 @@ const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/category/"
 export const CategoryAPI = {
 
     category(){
-        axios.get(API_URL + "getCategory.php")
+        return axios.get(API_URL + "getCategory.php")
             .then((res)=>{  
                 return res.data
             })

@@ -9,7 +9,7 @@ export const category_reducer = ( state = initialState, action ) => {
         case CATEGORY:{
             return {
                 ...state,
-                category: action.category
+                categoryArr: action.category
             }
         }
         default:{
@@ -18,8 +18,9 @@ export const category_reducer = ( state = initialState, action ) => {
     }
 }
 
-export const category = () => {
-    return (dispatch) => CategoryAPI.category().then((res)=>{
+export const category = () => (dispatch) => {
+    CategoryAPI.category()
+    .then((res)=>{
         dispatch({ 
             type:CATEGORY,
             category: res
