@@ -1,14 +1,16 @@
 import React from 'react'
+import plaseholder_image from '../../../images/plaseholder_image.png'
 
 function Part({ arrPart }) {
     return (
         <>
           {
+            arrPart && arrPart !== undefined ?
            arrPart.map((item, index)=><div className="part_block" key={item.id}>
-                <div className="block-part_photo" style={{ background:`url('${item.url}')`}}></div>
+                <div className="block-part_photo" style={ item.url ? { background:`url('${item.url}')`}:{ background:`url('${plaseholder_image}')` }}></div>
                 <div className="block-part_info">
                   <p>
-                    {item.title_part}
+                    {item.name}
                   </p>
                 </div>
                 <div className="block_part_price">
@@ -18,6 +20,7 @@ function Part({ arrPart }) {
                 </div>
               </div>
            )
+           : <div> Loading... </div>
           }  
         </>
     )

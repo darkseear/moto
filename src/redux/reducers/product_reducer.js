@@ -43,20 +43,20 @@ export const products = (category_id) => {
     })
 }
 
-export const last_receipts = (category_id) => {
+export const getLast_receipts = (category_id) => {
     return (dispatch) => ProductsApi.last_receipts(category_id).then((res)=>{
         dispatch({
             type:LAST_RECEIPTS,
-            products: res
+            last_receipts: res
         })
     })
 }
 
-export const sales = (category_id) => {
+export const getSales = (category_id) => {
     return (dispatch) => ProductsApi.sales(category_id).then((res)=>{
         dispatch({
             type:SALES,
-            products: res
+            sales: res
         })
     })
 }

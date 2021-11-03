@@ -11,7 +11,6 @@ function Cart() {
                         <Categories />
                 </div>
                 <div>
-                    
                     Cart
                 </div>
             </div>

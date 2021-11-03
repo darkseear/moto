@@ -13,7 +13,7 @@
     font-style: normal;
     font-weight: normal;
     font-size: 21px;
-    line-height: 45px;
+    line-height: 45px;  
     margin-bottom: 10px;
     text-transform: uppercase;
     padding-left: 20px;
@@ -24,4 +24,5 @@
     min-height: 213px;
     padding-bottom: 21px;
     display: flex;
+    overflow: auto;
 }
