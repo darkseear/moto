@@ -1,7 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
 
-function Header({ isLogin }) {
+function Header() {
+
+    const { isLogged } = useSelector( state => state.auth )
+
     return (
         <header>
             <div className="header_top">
@@ -66,35 +70,33 @@ function Header({ isLogin }) {
                 </div>
             </div>
             <div className="header_bottom">
-
                 <div className="category_container">
                         <div className="left_categoryBlock">
                             <div className="title_category-left">
-                            <Link to={"/"}> Главная</Link>
+                            <NavLink activeClassName="navigation_active" exact to={"/"}> Главная</NavLink>
                             </div>
                             <div className="title_category-left">
-                            <Link to={"/service"}> Сервис</Link>
+                            <NavLink activeClassName="navigation_active" to={"/service"}> Сервис</NavLink>
                             </div>
                             <div className="title_category-left">
-                            <Link to={"/museum"}> Наш музей</Link>
+                            <NavLink activeClassName="navigation_active" to={"/museum"}> Наш музей</NavLink>
                             </div>
                         </div>
                         <div className="right_categoryBlock">
                             <div className="title_category-right">
-                            <Link to={"/contacts"}> Контакты</Link>
+                            <NavLink activeClassName="navigation_active" to={"/contacts"}> Контакты</NavLink>
                             </div>
                             <div className="title_category-right">
-                                {isLogin ? 
-                                    <Link to={"/login"}> Профиль</Link>
-                                    :<Link to={"/login"}> Вход</Link>
+                                {isLogged ? 
+                                    <NavLink activeClassName="navigation_active" to={"/login"}> Профиль</NavLink>
+                                    :<NavLink activeClassName="navigation_active" to={"/login"}> Вход</NavLink>
                                 }   
                             </div>
                             <div className="title_category-right">
-                            <Link to={"/cart"}> Корзина</Link>
+                            <NavLink activeClassName="navigation_active" to={"/cart"}> Корзина</NavLink>
                             </div>
                         </div>
                 </div>
-
             </div>
         </header>
     )

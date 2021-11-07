@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link, NavLink } from 'react-router-dom'
 import { category } from '../../../redux/reducers/category_reducer'
 
 function Categories() {
@@ -14,10 +15,10 @@ function Categories() {
     return (
         <div className="categories_container" >
             {
-                categoryArr && categoryArr!== undefined ?  categoryArr.map((item)=> <a key={item.id}>
+                categoryArr && categoryArr!== undefined ?  categoryArr.map((item)=> <NavLink style={{ color:'black' }} activeClassName="category_navigation_active" to={`/catalog/${item.id}`} key={item.id}>
                    <div className="container-categories_category" >
                     {item.name}
-                </div> </a>) : <div> Loading... </div> 
+                </div> </NavLink>) : <div> Loading... </div> 
             }
         </div>
     )

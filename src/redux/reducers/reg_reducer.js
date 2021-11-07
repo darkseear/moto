@@ -18,6 +18,10 @@ export const reg_reducer = (state = initialState, action) => {
     }
 }
 
-export const registrationUser = (firstname, lastname, email, password) => {
-    return (dispatch) => RegAPI.registration(firstname, lastname, email, password)
+export const registrationUser = (obj) => {
+    return (dispatch) => RegAPI.registration(obj)
+        .then((res)=>{
+            console.log(res)
+            alert("Зарегистрировались")
+        })
 }

@@ -47,6 +47,21 @@ body{
     font-weight: normal;
 }
 
+.category_navigation_active{
+    color: crimson!important;
+}
+
+.navigation_active{
+    border: 3px solid #e3eaef;
+    border-radius: 25px;
+    font-weight: bold;
+    padding: 5px ;
+    padding-left: 10px;
+    padding-right: 10px;
+    transform: scale(1.1);
+    color: #930620 !important;
+    box-shadow: 0 0 14px;
+}
 
 @media screen and ( max-width: 1920px) {
     body{
@@ -115,3 +130,7 @@ body{
 @import './page_title.scss';
 @import './contacts.scss';
 @import './categories.scss';
+@import './registration_form.scss';
+@import './registration.scss';
+@import './product_page.scss';
+@import './catalog.scss';

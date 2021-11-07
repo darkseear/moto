@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { login } from '../../../redux/reducers/auth_reducer';
 
-function LoginForm({ isLogin , setIsLogin}) {
+function LoginForm() {
 
-    let testVerification = { login:'login', password:'12345678' };
-
-    const [state, setState] = React.useState({login:'', password: ''});
+    const [state, setState] = React.useState({email:'', password: ''});
+    const { isLogged } = useSelector( state => state.auth )
+    const dispatch = useDispatch()
 
     const SignIn = (e) => {
         e.preventDefault();
         console.log(state)
-       
-        if( testVerification.login === state.login && testVerification.password ) setIsLogin(true)
+        dispatch(login(state))
     }
 
     const onChangeInput = (e) => {
         if(e.target.name === "password") setState({...state, password: e.target.value})
-        if(e.target.name === "login") setState({...state, login: e.target.value})
+        if(e.target.name === "login") setState({...state, email: e.target.value})
     }
 
     return (
@@ -23,11 +26,11 @@ function LoginForm({ isLogin , setIsLogin}) {
             <form onSubmit={ SignIn }>
                 <div className="login-input_container">
                     <label htmlFor="login">Логин</label>
-                    <input name="login" id="login" value={ state.login } onChange={ onChangeInput }/>
+                    <input name="login" id="login" value={ state.login } onChange={ onChangeInput } required/>
                 </div>
                 <div className="password-input_container">
                     <label htmlFor="password">Пароль</label>
-                    <input name="password" id="password" value={ state.password } onChange={ onChangeInput }/>
+                    <input name="password" id="password" value={ state.password } onChange={ onChangeInput } required/>
                 </div>
                 <div className="password_forgot">
                     <a href="" >
@@ -38,7 +41,9 @@ function LoginForm({ isLogin , setIsLogin}) {
                     <button  type="submit">Войти</button>
                 </div>
                 <div className="login_registration">
-                    <button type="button">Зарегистрироваться</button>
+                    <Link to={"/registration"}> 
+                        <button type="button">Зарегистрироваться</button> 
+                    </Link>
                 </div>
             </form>
         </div>

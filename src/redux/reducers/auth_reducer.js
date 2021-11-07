@@ -5,7 +5,7 @@ const SIGN_OUT = "SIGN_OUT"
 
 let user = JSON.parse(localStorage.getItem("user"))
 
-let initialState = user ? { isLogged: false } : { isLogged: true}
+let initialState = user ? { isLogged: true } : { isLogged: false}
 
 export const auth_reducer = ( state = initialState, action ) => {
     switch(action.type){
@@ -27,13 +27,15 @@ export const auth_reducer = ( state = initialState, action ) => {
     }
 }
 
-export const login = (email, password) => {
-    return (dispatch) => AuthAPI.login(email, password).then((res)=>{
-        if(res.data.jwt){
+export const login = (data) => {
+    return (dispatch) => AuthAPI.login(data)
+    .then((res)=>{
+        if(res.jwt){
             user = JSON.parse(localStorage.getItem("user"))
             dispatch({
                 type: SIGN_IN
             })
+            
         } else {
             console.log("что то пошло не так ")
         }
@@ -41,7 +43,10 @@ export const login = (email, password) => {
 }
 
 export const logout = () => {
-    return (dispatch) => AuthAPI.logout().then((res)=>{
-        if(res) dispatch({ type:SIGN_OUT })
-    })
+    return (dispatch) => {
+        AuthAPI.logout()
+        dispatch({
+            type: SIGN_OUT
+        })
+    }
 }

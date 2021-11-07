@@ -7,9 +7,6 @@ import { getLast_receipts } from '../../../redux/reducers/product_reducer'
 
 function RecentArrivals() {
 
-    let arrPart_test = [{id:1, title_part: 'name moto', price: '1000', url: img}, 
-                        {id:2, title_part: 'name moto2', price: '2000' ,url: img} ]
-
     const dispatch  = useDispatch()
     const { last_receipts } = useSelector( state => state.products )
 

@@ -5,13 +5,11 @@ import './styles/style.scss'
 import { useState } from 'react';
 
 function App() {
-  
-  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <>
-      <Header isLogin = { isLogin }/>
-      <Main isLogin={ isLogin } setIsLogin={ setIsLogin }/>
+      <Header />
+      <Main />
       <Footer />
     </>
   );

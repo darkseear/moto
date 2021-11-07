@@ -7,9 +7,10 @@ import Contacts from '../pages/contacts/Contacts'
 import Home from '../pages/home/Home'
 import Login from '../pages/login/Login'
 import Museum from '../pages/museum/Museum'
+import Registration from '../pages/registration/Registration'
 import Service from '../pages/service/Service'
 
-function ContentBody({ isLogin, setIsLogin }) {
+function ContentBody() {
     return (
         <>
             <Switch>
@@ -22,11 +23,14 @@ function ContentBody({ isLogin, setIsLogin }) {
                 <Route path="/museum">
                     <Museum/>
                 </Route>
+                <Route path="/catalog/:id">
+                    <Catalog/>
+                </Route>
                 <Route path="/catalog">
                     <Catalog/>
                 </Route>
                 <Route path="/login">
-                    <Login setIsLogin={ setIsLogin } isLogin={ isLogin }/>
+                    <Login />
                 </Route> 
                 <Route path="/service">
                     <Service/>
@@ -36,6 +40,9 @@ function ContentBody({ isLogin, setIsLogin }) {
                 </Route>
                 <Route path="/cart">
                     <Cart/>
+                </Route>
+                <Route path="/registration">
+                    <Registration/>
                 </Route>
             </Switch>
         </>

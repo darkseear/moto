@@ -1,0 +1,41 @@
+.registration_form{
+    width: 800px;
+    height: 500px;
+}
+
+.registration_form form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lastname-input_container{
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    max-width: 400px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.lastname-input_container input {
+    height: 35px;
+    font-size: 20px;
+}
+
+.firstname-input_container{
+    display: flex;
+    flex-direction: column;
+    min-width: 280px;
+    max-width: 400px;
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.firstname-input_container input {
+    height: 35px;
+    font-size: 20px;
+}

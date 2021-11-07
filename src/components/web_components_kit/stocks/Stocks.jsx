@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux'
 import { getSales } from '../../../redux/reducers/product_reducer'
 
 function Stocks() {
-    let arrPart_test = [{id:1, title_part: 'name moto', price: '1000', url: img}, 
-    {id:2, title_part: 'name moto2', price: '2000' ,url: img} ]
 
     const dispatch = useDispatch()
     const { sales } = useSelector( state => state.products)
