@@ -4,6 +4,7 @@ const PRODUCTS = "PRODUCTS" // список продуктов
 const LAST_RECEIPTS = "LAST_RECEIPTS" // список последних поступлений
 const SALES = "SALES" // список акций
 const PRODUCTS_CATEGORI_ID = "PRODUCTS_CATEGORI_ID"// список определенной категории
+const READ_ONE = "READ_ONE"// возвращает по одному товар с выббранным ид 
 
 let initialState = {}
 
@@ -32,6 +33,13 @@ export const product_reducer = (state = initialState, action) => {
            return {
                ...state,
                sales: action.sales
+           }
+       }
+
+       case READ_ONE: {
+           return {
+               ...state,
+               read_one: action.read_one
            }
        }
 
@@ -73,6 +81,15 @@ export const getSales = (category_id) => {
         dispatch({
             type:SALES,
             sales: res
+        })
+    })
+}
+
+export const getReadOne = (id) => {
+    return (dispatch) => ProductsApi.read_one(id).then((res)=>{
+        dispatch({
+            type:READ_ONE,
+            read_one: res
         })
     })
 }

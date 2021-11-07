@@ -36,7 +36,7 @@ export const ProductsApi = {
     },
 
     read_one(id){
-        return axios.get(API_URL + `read_one.php?${id}`)
+        return axios.get(API_URL + `read_one.php/?${id}`)
             .then((res)=>{
                 return res.data
             })
