@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import plaseholder_image from '../../../images/plaseholder_image.png'
 
 function Part({ arrPart }) {
@@ -6,7 +7,7 @@ function Part({ arrPart }) {
         <>
           {
             arrPart && arrPart !== undefined ?
-           arrPart.map((item, index)=><div className="part_block" key={item.id}>
+           arrPart.map((item, index)=><NavLink style={{ cursor:'pointer', color:'black' }} to={`/read_one/${item.id}`} key={item.id}><div className="part_block" >
                 <div className="block-part_photo" style={ item.url ? { background:`url('${item.url}')`}:{ background:`url('${plaseholder_image}')` }}></div>
                 <div className="block-part_info">
                   <p>
@@ -19,6 +20,7 @@ function Part({ arrPart }) {
                   </p>
                 </div>
               </div>
+              </NavLink>
            )
            : <div> Loading... </div>
           }  
