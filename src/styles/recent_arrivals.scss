@@ -1,5 +1,6 @@
 .recentArrivals_container{
-    height: 100%;
+    // height: 100%;
+    height: 360px;
     width: 100%;
     margin-top: 71px;
     background: #FFFFFF;
@@ -22,6 +23,7 @@
 .recentArrivals_parth{
     width: 100%;
     min-height: 213px;
+    padding-top: 10px;
     padding-bottom: 21px;
     display: flex;
     overflow: auto;
