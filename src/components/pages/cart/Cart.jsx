@@ -6,7 +6,7 @@ function Cart() {
     return (
         <>
             <PageTitle  title={"Корзина"} />
-            <div>
+            <div className="__container">
                 <div style={{ float:'left', marginRight:'10px'}}>
                         <Categories />
                 </div>

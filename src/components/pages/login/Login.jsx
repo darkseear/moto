@@ -17,9 +17,9 @@ function Login() {
     }
 
     return (
-        <div className="login_container">
+        <div className="login_container ">
             <PageTitle  title={isLogged ? "Профиль" : "Вход"} />   
-            <div className="container-login_loginForm">
+            <div className="container-login_loginForm __container">
                 {
                     !isLogged ? <LoginForm /> 
                     :

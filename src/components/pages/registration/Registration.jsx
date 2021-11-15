@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router'
+import GoBackNext from '../../web_components_kit/goBack/GoBackNext'
 import PageTitle from '../../web_components_kit/page_title/PageTitle'
 import RegistrationForm from '../../web_components_kit/registration_form/RegistrationForm'
 
@@ -16,15 +17,15 @@ function Registration() {
     }
 
     return (
-        <div className="registration_container">
+        <>
+        <div className="registration_container __container">
             <PageTitle  title={"Регистрация"} />   
             <div className="container-registration_registrationForm">
                 <RegistrationForm />
             </div>
-            <div>
-                <div onClick={()=>{ history.goBack() }}>  Back </div>
-            </div>
         </div>
+        <GoBackNext/>
+        </>
     )
 }
 

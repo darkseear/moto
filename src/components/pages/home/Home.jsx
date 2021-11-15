@@ -7,7 +7,7 @@ import Stocks from '../../web_components_kit/stocks/Stocks'
 function Home() {
     return (
         <>
-            <div>
+            <div className="__container">
                 <News/>
                 <RecentArrivals/>
                 <Stocks/>

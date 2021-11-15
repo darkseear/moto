@@ -5,7 +5,7 @@ function Contacts() {
     return (
         <div className="contacts_container">
             <PageTitle  title={"Контакты"} />
-            <div className="contacts_body">
+            <div className="contacts_body __container">
 
                 <div className="contacts_phone">
                     <p className="bold_title" >Телефоны</p>

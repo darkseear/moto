@@ -6,7 +6,7 @@ function Service() {
     return (
         <>  
             <PageTitle  title={"Сервис"} />
-            <div>
+            <div className="__container" >
                 <div style={{ float:'left', marginRight:'10px'}}>
                     <Categories />
                 </div>

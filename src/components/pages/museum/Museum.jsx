@@ -6,7 +6,7 @@ function Museum() {
     return (
         <>  
             <PageTitle  title={"Наш музей"} />
-            <div>
+            <div className="__container">
                 <div style={{ float:'left', marginRight:'10px'}}>
                 <Categories />
                 </div>
