@@ -101,6 +101,24 @@ body{
     border-radius: 25px;
 }
 
+.title_p__all{
+    margin-bottom: 20px;
+    font-size: 30px;
+}   
+
+.title_p__all p {
+    font-weight: bold;
+}
+
+.shadow_box-block{
+    box-shadow: 0 0 7px #28343F;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+
+
 @media screen and ( max-width: 1920px) {
     body{
         zoom: 75%;
