@@ -23,8 +23,11 @@ function Login() {
                 {
                     !isLogged ? <LoginForm /> 
                     :
-                    <div onClick={ logoutButton }> 
-                        LOGOUT
+                    // <div onClick={ logoutButton }> 
+                    //     LOGOUT
+                    // </div>
+                    <div>
+                        
                     </div>
                 }
             </div>

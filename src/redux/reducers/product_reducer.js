@@ -93,3 +93,18 @@ export const getReadOne = (id) => {
         })
     })
 }
+
+export const createProduct = (objImg, objProd) => {
+    return (dispatch) => ProductsApi.uploadPrImg(objImg)
+        .then((res) => {
+            if(res.id && res.id !== null){
+                let arr = [res.id];
+                ProductsApi.createProduct({...objProd, imgsArr: arr})
+                    .then((res)=>{
+                            alert(JSON.stringify(res))
+                        })
+            } else {
+                alert(JSON.stringify(res));
+            }
+        })
+}

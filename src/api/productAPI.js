@@ -2,6 +2,9 @@ import axios from "axios"
 
 const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
 
+let jwt = "";
+if(localStorage.getItem("user") && localStorage.getItem("user") !== null ) jwt = JSON.parse(localStorage.getItem("user")).jwt
+
 export const ProductsApi = {
     products(category_id){
         if(category_id !==null && category_id !==undefined) {
@@ -40,6 +43,49 @@ export const ProductsApi = {
             .then((res)=>{
                 return res.data
             })
-    }
+    },
+
+    uploadPrImg(objImg){
+        const instance = axios.create({
+            headers:{
+                "X-Access-Token": jwt
+            }
+        })
+        return instance.post(API_URL + `uploadPrImg.php`,  objImg )
+            .then((res)=>{
+                console.log(res);
+                return res.data;
+            })
+    },
+
+    createProduct(objProd){
+        
+        const instance = axios.create({
+            headers:{
+                "X-Access-Token": jwt
+            }
+        })
+        
+        return  instance.post( API_URL + `createProduct.php`, objProd)
+            .then((res) => {
+                console.log(res);
+                return res.data;
+            })
+    },
+
+    updateProduct(objProd){
+
+        const instance = axios.create({
+            headers:{
+                'X-Access-Token': jwt
+            }
+        })
+
+        return instance.put( API_URL + `update.php`, objProd )
+            .then((res)=>{
+                console.log(res.data)
+                return res.data
+            })
+    }  
 
 }
