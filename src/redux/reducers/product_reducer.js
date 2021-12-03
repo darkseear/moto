@@ -104,8 +104,7 @@ export const createProduct = (objImg, objProd) => {
 
     debugger
 
-
-    return (dispatch) => ProductsApi.uploadPrImg(objImg)
+    ProductsApi.uploadPrImg(objImg)
         .then((res) => {
             if (res.id && res.id !== null) {
                 let arr = [res.id];

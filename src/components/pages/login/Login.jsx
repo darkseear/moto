@@ -27,11 +27,12 @@ function Login() {
                             <LoginForm />
                         </div>
                     :
-                    // <div onClick={ logoutButton }> 
-                    //     LOGOUT
-                    // </div>
+                    
                     <div>
                         <CreateProduct/>
+                        <div onClick={ logoutButton }> 
+                        LOGOUT
+                        </div>
                     </div>
                 }
         </div>

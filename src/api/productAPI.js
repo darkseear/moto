@@ -3,89 +3,90 @@ import axios from "axios"
 const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
 
 let jwt = "";
-if(localStorage.getItem("user") && localStorage.getItem("user") !== null ) jwt = JSON.parse(localStorage.getItem("user")).jwt
+if (localStorage.getItem("user") && localStorage.getItem("user") !== null) jwt = JSON.parse(localStorage.getItem("user")).jwt
 
 export const ProductsApi = {
-    products(category_id){
-        if(category_id !==null && category_id !==undefined) {
+    products(category_id) {
+        if (category_id !== null && category_id !== undefined) {
             return axios.get(API_URL + `getProducts.php?category_id=${category_id}`)
-                .then((res)=>{
+                .then((res) => {
                     console.log(res.data)
                     return res.data
                 })
-                
+
         } else {
             return axios.get(API_URL + "getProducts.php")
-                .then((res)=>{
+                .then((res) => {
                     console.log(res.data)
                     return res.data
                 })
-            
+
         }
-    }, 
+    },
 
-    last_receipts(){
+    last_receipts() {
         return axios.get(API_URL + "getLastReceipts.php")
-            .then((res)=>{
-                return res.data
-            })
-    },
-
-    sales(){
-        return axios.get(API_URL + "getSales.php")
-            .then((res)=>{
-                return res.data
-            })
-    },
-
-    read_one(id){
-        return axios.get(API_URL + `read_one.php/?id=${id}`)
-            .then((res)=>{
-                return res.data
-            })
-    },
-
-    uploadPrImg(objImg){
-        const instance = axios.create({
-            headers:{
-                "X-Access-Token": jwt
-            }
-        })
-        return instance.post(API_URL + `uploadPrImg.php`,  objImg )
-            .then((res)=>{
-                console.log(res);
-                return res.data;
-            })
-    },
-
-    createProduct(objProd){
-        
-        const instance = axios.create({
-            headers:{
-                "X-Access-Token": jwt
-            }
-        })
-        
-        return  instance.post( API_URL + `createProduct.php`, objProd)
             .then((res) => {
-                console.log(res);
+                return res.data
+            })
+    },
+
+    sales() {
+        return axios.get(API_URL + "getSales.php")
+            .then((res) => {
+                return res.data
+            })
+    },
+
+    read_one(id) {
+        return axios.get(API_URL + `read_one.php/?id=${id}`)
+            .then((res) => {
+                return res.data
+            })
+    },
+
+    uploadPrImg(objImg) {
+        const instance = axios.create({
+            headers: {
+                "X-Access-Token": jwt,
+                "Access-Control-Allow-Origin": "*"
+            }
+        })
+        return instance.post(API_URL + `uploadPrImg.php`, objImg)
+            .then((res) => {
+                console.log(res.data);
                 return res.data;
             })
     },
 
-    updateProduct(objProd){
+    createProduct(objProd) {
 
         const instance = axios.create({
-            headers:{
+            headers: {
+                "X-Access-Token": jwt
+            }
+        })
+
+        return instance.post(API_URL + `createProduct.php`, objProd)
+            .then((res) => {
+                console.log(res.data);
+                return res.data;
+            })
+    },
+
+    updateProduct(objProd) {
+
+        const instance = axios.create({
+            headers: {
                 'X-Access-Token': jwt
             }
         })
 
-        return instance.put( API_URL + `update.php`, objProd )
-            .then((res)=>{
+        return instance.put(API_URL + `update.php`, objProd)
+            .then((res) => {
                 console.log(res.data)
                 return res.data
             })
-    }  
+    }
 
 }

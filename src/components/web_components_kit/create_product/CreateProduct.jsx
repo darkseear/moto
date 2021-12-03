@@ -15,8 +15,8 @@ function CreateProduct() {
     React.useEffect(()=>{
         const photoData = new FormData();
         photoData.append('file', photo);
-        console.warn(photo);
-        setObjImg({ ...objImg, sendimage: photoData })
+        console.log(photo);
+        setObjImg({ ...objImg, sendimage: photo })
     }, [photo])
 
     const handleSubmit = (e) => {
