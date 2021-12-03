@@ -49,10 +49,14 @@ export const ProductsApi = {
         const instance = axios.create({
             headers: {
                 "X-Access-Token": jwt,
-                "Access-Control-Allow-Origin": "*"
+                'content-type': 'multipart/form-data'
             }
         })
-        return instance.post(API_URL + `uploadPrImg.php`, objImg)
+
+        const photoData = new FormData();
+        photoData.append('file', objImg.sendimage);
+
+        return instance.post(API_URL + `uploadPrImg.php`, { ...objImg , sendimage: photoData })
             .then((res) => {
                 console.log(res.data);
                 return res.data;

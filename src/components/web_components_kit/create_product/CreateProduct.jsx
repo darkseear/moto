@@ -3,21 +3,19 @@ import { createProduct } from '../../../redux/reducers/product_reducer';
 
 function CreateProduct() {
 
-    const [photo, setPhoto] = useState()
+    // const [photo, setPhoto] = useState()
     const [creatProd, setCreatProd] = useState({ brand:'', name:'', price:'', decription:'', characteristics:'', category_id:'' })
 
-    const [objImg, setObjImg] = useState({ title:'', sendimage:''});
+    const [objImg, setObjImg] = useState({ title:'', sendimage:null});
 
     const handlePhotoInputChange = (e) => {
-        setPhoto(e.target.files[0])
+        setObjImg({ ...objImg , sendimage: e.target.files[0] })
     }
 
-    React.useEffect(()=>{
-        const photoData = new FormData();
-        photoData.append('file', photo);
-        console.log(photo);
-        setObjImg({ ...objImg, sendimage: photo })
-    }, [photo])
+    // React.useEffect(()=>{
+    //     console.log(photo);
+    //     setObjImg({ ...objImg, sendimage: photo })
+    // }, [photo])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -47,7 +45,7 @@ function CreateProduct() {
                         </div>
                     </div>
                     <br/>
-                    <img style={{ width:'250px', height:'250px' }}  src={photo? URL.createObjectURL(photo) : null} alt={photo? photo.name : null} />
+                    <img style={{ width:'250px', height:'250px' }}  src={objImg.sendimage? URL.createObjectURL(objImg.sendimage) : null} alt={objImg.sendimage ? objImg.sendimage.name : null} />
                 </div>
                 <div className="form-product__img">
                     <p>Введи сведения о товаре:</p>
