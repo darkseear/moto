@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const API_URL = "http://localhost/api/user/"
-    // const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/user/"
+// const API_URL = "http://localhost/api/user/"
+    const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/user/"
 
 const instance = axios.create({
     withCredentials: false,

@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const API_URL = "http://localhost/api/product/"
-    // const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
+// const API_URL = "http://localhost/api/product/"
+    const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
 
 let jwt = "";
 if (localStorage.getItem("user") && localStorage.getItem("user") !== null) jwt = JSON.parse(localStorage.getItem("user")).jwt
@@ -55,7 +55,8 @@ export const ProductsApi = {
         }
 
         const photoData = new FormData();
-        photoData.append('files[]', objImg.sendimage, objImg.sendimage.name, objImg.title);
+        photoData.append('sendimage', objImg.sendimage, objImg.sendimage.name);
+        photoData.append('title', objImg.title);
         // JSON.stringify(objImg)
         console.log(objImg.sendimage.name)
         return axios.post(API_URL + `uploadPrImg.php`, photoData, {...conf })
