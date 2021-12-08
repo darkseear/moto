@@ -102,8 +102,6 @@ export const getReadOne = (id) => {
 
 export const createProduct = (objImg, objProd) => {
 
-    debugger
-
     ProductsApi.uploadPrImg(objImg)
         .then((res) => {
             if (res.id && res.id !== null) {
@@ -112,6 +110,20 @@ export const createProduct = (objImg, objProd) => {
                     .then((res) => {
                         alert(JSON.stringify(res))
                     })
+            } else {
+                alert(JSON.stringify(res));
+            }
+        })
+}
+
+export const uoloadImage = (objImg) => {
+
+    ProductsApi.uploadPrImg(objImg)
+        .then((res) => {
+            if (res.id && res.id !== null) {
+
+                alert(JSON.stringify(res))
+
             } else {
                 alert(JSON.stringify(res));
             }

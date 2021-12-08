@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { createProduct } from '../../../redux/reducers/product_reducer';
+import { createProduct , uoloadImage} from '../../../redux/reducers/product_reducer';
 
 function CreateProduct() {
 
@@ -9,7 +9,7 @@ function CreateProduct() {
     const [objImg, setObjImg] = useState({ title:'', sendimage:null});
 
     const handlePhotoInputChange = (e) => {
-        setObjImg({ ...objImg , sendimage: e.target.files[0] })
+        setObjImg({ ...objImg , sendimage: e.currentTarget.files[0] })
     }
 
     // React.useEffect(()=>{
@@ -20,6 +20,10 @@ function CreateProduct() {
     const handleSubmit = (e) => {
         e.preventDefault()
         createProduct(objImg, creatProd);
+    }
+
+    const handlePhoto = () => {
+        uoloadImage(objImg)
     }
 
     const onChengeInputCreate = (e) => {
@@ -42,6 +46,9 @@ function CreateProduct() {
                         <div>
                             <label htmlFor="title"> Название изображения </label>
                             <input type="text" name="title" value={ objImg.title } onChange={ onChengeInputObjImg }/>
+                        </div>
+                        <div onClick={()=> handlePhoto() }>
+                            отправить только фото 
                         </div>
                     </div>
                     <br/>

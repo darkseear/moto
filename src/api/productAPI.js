@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
+const API_URL = "http://localhost/api/product/"
+    // const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
 
 let jwt = "";
 if (localStorage.getItem("user") && localStorage.getItem("user") !== null) jwt = JSON.parse(localStorage.getItem("user")).jwt
@@ -46,17 +47,18 @@ export const ProductsApi = {
     },
 
     uploadPrImg(objImg) {
-        const instance = axios.create({
+        const conf = {
             headers: {
                 "X-Access-Token": jwt,
-                'content-type': 'multipart/form-data'
+                "Content-Type": "application/json"
             }
-        })
+        }
 
         const photoData = new FormData();
-        photoData.append('file', objImg.sendimage);
-
-        return instance.post(API_URL + `uploadPrImg.php`, { ...objImg , sendimage: photoData })
+        photoData.append('files[]', objImg.sendimage, objImg.sendimage.name, objImg.title);
+        // JSON.stringify(objImg)
+        console.log(objImg.sendimage.name)
+        return axios.post(API_URL + `uploadPrImg.php`, photoData, {...conf })
             .then((res) => {
                 console.log(res.data);
                 return res.data;
