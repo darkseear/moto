@@ -26,8 +26,29 @@ function CreateProduct() {
         uoloadImage(objImg)
     }
 
-    const onChengeInputCreate = (e) => {
-        setCreatProd({ ...creatProd, brand: e.target.value})
+   
+
+    const onChengeInputCreate = (e, name) => {
+        switch(name){
+            case 'brand':{
+                setCreatProd({ ...creatProd, brand: e.target.value})
+            }
+            case 'name': {
+                setCreatProd({ ...creatProd, name: e.target.value})
+            }
+            case 'price':{
+                setCreatProd({ ...creatProd, price: e.target.value})
+            }
+            case 'description':{
+                setCreatProd({ ...creatProd, decription: e.target.value})
+            }
+            case 'characterisrics': {
+                setCreatProd({ ...creatProd, characteristics: e.target.value})
+            }
+            default:{
+                setCreatProd({ ...creatProd })
+            }
+        }
     }
 
     const onChengeInputObjImg = (e) => {
@@ -41,11 +62,13 @@ function CreateProduct() {
                     <div>
                         <div>
                             <label htmlFor="photo" >Загрузите изображения</label>
-                            <input type="file" name="photo" onChange={ handlePhotoInputChange }/>
+                            <br/>
+                            <input type="file" name="photo" multiple onChange={ handlePhotoInputChange }/>
                         </div>
                         <div>
                             <label htmlFor="title"> Название изображения </label>
-                            <input type="text" name="title" value={ objImg.title } onChange={ onChengeInputObjImg }/>
+                            <br/>
+                            <input className="custom_input" type="text" name="title" value={ objImg.title } onChange={ onChengeInputObjImg }/>
                         </div>
                         <div onClick={()=> handlePhoto() }>
                             отправить только фото 
@@ -56,8 +79,41 @@ function CreateProduct() {
                 </div>
                 <div className="form-product__img">
                     <p>Введи сведения о товаре:</p>
-                    <input placeholder="Brand" name="brand" id="brand"  value={ creatProd.brand } onChange={onChengeInputCreate} />
-
+                    <div>
+                        <label htmlFor="brand" > Бренд товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Brand" name="brand" id="brand"  value={ creatProd.brand } onChange={(e) => onChengeInputCreate(e, "brand")} />
+                    </div>
+                    <div>
+                        <label htmlFor="name" > Название товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Name" name="name" id="name"  value={ creatProd.name } onChange={(e) => onChengeInputCreate(e, "name")} />
+                    </div>   
+                    <div>
+                        <label htmlFor="price" > Название товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Price" name="price" id="price"  value={ creatProd.price } onChange={(e) => onChengeInputCreate(e, "prce")} />
+                    </div>   
+                    <div>
+                        <label htmlFor="description" > Название товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Description" name="description" id="description"  value={ creatProd.description } onChange={(e) => onChengeInputCreate(e, "description")} />
+                    </div>   
+                    <div>
+                        <label htmlFor="proisvod" > Название товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Производитель" name="proizvod" id="proizvod"  value={ creatProd.proizvod } onChange={(e) => onChengeInputCreate(e, "proizvod")} />
+                    </div>   
+                    <div>
+                        <label htmlFor="dvigatel" > Название товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Двигатель" name="dvigatel" id="dvigatel"  value={ creatProd.dvigatel } onChange={(e) => onChengeInputCreate(e, "dvigatel")} />
+                    </div>    
+                    <div>
+                        <label htmlFor="sila_dvigatel" > Название товара: </label> 
+                        <br/>
+                        <input className="custom_input" placeholder="Мощность двигателя" name="sila_dvigatel" id="sila_dvigatel"  value={ creatProd.name } onChange={(e) => onChengeInputCreate(e, "name")} />
+                    </div>   
                 </div>
                 <div>
                     <button type="submit">Отправить</button>

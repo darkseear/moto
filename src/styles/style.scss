@@ -170,6 +170,17 @@ body{
     min-height: 745px;
 }
 
+.custom_input{
+    width: 310px;
+    height: 25px;
+    border-radius: 8px;
+}
+
+.custom_input::placeholder{
+    font-size: 16px;
+    padding-left: 10px;
+}
+
 @media screen and (max-width:1260px) {
     body{
         padding: 0px 50px;
