@@ -170,6 +170,10 @@ body{
     min-height: 745px;
 }
 
+.bottom_margin{
+    margin-bottom: 20px;
+}
+
 .custom_input{
     width: 310px;
     height: 25px;
@@ -179,6 +183,28 @@ body{
 .custom_input::placeholder{
     font-size: 16px;
     padding-left: 10px;
+    transition: 2s;
+}
+
+.form_button-submit{
+    width: 200px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.form_button-submit:active{
+    color: blanchedalmond;
+    font-size: 23px;
+    background-color : brown!important;
+    transition: 0.2s;
+}
+
+.form_button-submit:hover{
+    background-color : rgb(116, 69, 69);
+    color: white;
 }
 
 @media screen and (max-width:1260px) {
@@ -206,3 +232,4 @@ body{
 @import './product_page.scss';
 @import './catalog.scss';
 @import './create_product.scss';
+@import './create_category.scss';

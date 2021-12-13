@@ -105,8 +105,10 @@ export const createProduct = (objImg, objProd) => {
     ProductsApi.uploadPrImg(objImg)
         .then((res) => {
             if (res.id && res.id !== null) {
-                let arr = JSON.stringify([Number(res.id)]);
-                ProductsApi.createProduct({...objProd, imgsArr: arr })
+                let arr_id = Number(res.id);
+                let arr = [];
+                arr[0] = arr_id;
+                ProductsApi.createProduct({...objProd, imgsArr: JSON.stringify(arr) })
                     .then((res) => {
                         alert(JSON.stringify(res))
                     })
