@@ -8,8 +8,6 @@ function CreateProduct() {
     // const [photo, setPhoto] = useState()
     const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', characteristics: [{ Производитель: "" }, { Двигатель: "" }, { ['Мощность двигателя']: "" }, { ['Объём двигателя']: '' }, { КПП: '' }], category_id: '' })
 
-    const [objImg, setObjImg] = useState({ title: '', sendimage: null });
-
     const dispatch = useDispatch()
 
     const { categoryArr } = useSelector(state => state.categorys)
@@ -17,9 +15,15 @@ function CreateProduct() {
     useEffect(() => {
         dispatch(category())
     }, [])
+    
+    const [objImg, setObjImg] = useState({ title: '', sendimage: null });
 
     const handlePhotoInputChange = (e) => {
         setObjImg({ ...objImg, sendimage: e.currentTarget.files[0] })
+    }
+
+    const onChengeInputObjImg = (e) => {
+        setObjImg({ ...objImg, title: e.target.value })
     }
 
     // React.useEffect(()=>{
@@ -31,14 +35,6 @@ function CreateProduct() {
         e.preventDefault()
 
         createProduct(objImg, { ...creatProd, characteristics: JSON.stringify(creatProd.characteristics) });
-    }
-
-    const handlePhoto = () => {
-        uoloadImage(objImg)
-    }
-
-    const onChengeInputObjImg = (e) => {
-        setObjImg({ ...objImg, title: e.target.value })
     }
 
     const onChengeInputCreate = (e, name) => {
@@ -146,23 +142,22 @@ function CreateProduct() {
                         <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="brand" > Бренд товара: </label>
-                            <br />
                             <input className="custom_input" placeholder="Brand" name="brand" type="text" value={creatProd.brand} onChange={(e) => onChengeInputCreate(e, "brand")} required />
                         </div>
+                        <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="name" > Название товара: </label>
-                            <br />
                             <input className="custom_input" placeholder="Name" name="name" id="name" value={creatProd.name} onChange={(e) => onChengeInputCreate(e, "name")} required />
                         </div>
+                        <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="price" > Цена: </label>
-                            <br />
                             <input className="custom_input" placeholder="Price" name="price" id="price" value={creatProd.price} onChange={(e) => onChengeInputCreate(e, "price")} required />
                         </div>
+                        <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="description" > Описание: </label>
-                            <br />
-                            <input className="custom_input" placeholder="Description" name="description" id="description" value={creatProd.description} onChange={(e) => onChengeInputCreate(e, "description")} required />
+                            <textarea className="custom_input" style={{ height:'70px' }}  name="description" id="description" value={creatProd.description} onChange={(e) => onChengeInputCreate(e, "description")} required />
                         </div>
                         <br />
                     </div>

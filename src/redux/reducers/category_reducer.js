@@ -32,5 +32,6 @@ export const createCategoryAC = (categoryData) => {
     return (dispatch)=> CategoryAPI.createCategory(categoryData)
     .then((res)=>{
         category()
+        alert(res.message)
     })
 }

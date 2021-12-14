@@ -110,7 +110,7 @@ export const createProduct = (objImg, objProd) => {
                 arr[0] = arr_id;
                 ProductsApi.createProduct({...objProd, imgsArr: JSON.stringify(arr) })
                     .then((res) => {
-                        alert(JSON.stringify(res))
+                        alert(JSON.stringify(res.message))
                     })
             } else {
                 alert(JSON.stringify(res));
