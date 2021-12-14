@@ -58,6 +58,15 @@ export const product_reducer = (state = initialState, action) => {
 export const products = (category_id) => {
     if (category_id) {
         return (dispatch) => ProductsApi.products(category_id).then((res) => {
+            
+            console.log(res)
+
+            if(res === null || res === undefined){
+                dispatch({
+                    type: PRODUCTS_CATEGORI_ID,
+                    products_category_id: null
+                })
+            }
             dispatch({
                 type: PRODUCTS_CATEGORI_ID,
                 products_category_id: res

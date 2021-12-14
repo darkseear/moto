@@ -14,6 +14,9 @@ export const ProductsApi = {
                     console.log(res.data)
                     return res.data
                 })
+                .catch((err)=>{
+                    console.log(err)
+                })
 
         } else {
             return axios.get(API_URL + "getProducts.php")

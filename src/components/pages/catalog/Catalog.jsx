@@ -28,7 +28,7 @@ function Catalog() {
                         <Categories />
                     </div>
                     <div className="catalog-page_container">
-                        { products_category_id && products_category_id !== undefined ? 
+                        { products_category_id && products_category_id !== undefined && products_category_id !== null ? 
                     <ProductPage products_category_id={products_category_id}/> 
                         :
                         <div>Loading...</div>
