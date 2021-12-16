@@ -12,9 +12,14 @@ function ReadOne() {
 
     const { id } = useParams()
     const dispatch = useDispatch()
+    const [state, setState] = useState()
 
     useEffect(()=>{
+
+        setState(true)
         dispatch(getReadOne(id))
+
+        return ()=> setState(false)
     }, [id])
 
     const { read_one } = useSelector( state => state.products )
@@ -37,9 +42,9 @@ function ReadOne() {
                     <div style={{ float:'left', marginRight:'25px'}}>
                             <Categories />
                     </div>
-                    <div style={{ width:'calc(100% - 305px)', display:'flex' }}>
+                    <div className="read_one-product">
                         {
-                            read_one && read_one !== undefined ? 
+                            read_one && !!state && state !== null && read_one !== undefined ? 
                             <div style={{ width:'100%' }}>
                                 <div style={{ display:'flex', marginBottom:'30px' }}>
                                     <div style={{ marginRight:'20px', marginRight:'150px' }}>
@@ -51,18 +56,16 @@ function ReadOne() {
 
                                         { 
                                             read_one.imgsArr && read_one.imgsArr[stateImg[0]] && read_one.imgsArr[stateImg[0]] !== undefined && read_one.imgsArr !== null?
-                                            <div className="photo_block-read_one"  style={{ display:'flex', flexDirection:'column', marginBottom:'30px'}}>
-                                                <div style={{ background:`url('${URL}/${read_one.imgsArr[stateImg[0]].url}')`, width:'350px', height:'350px', backgroundSize:'contain' }}>
-                                                {
-                                                    read_one.imgsArr[stateImg[0]].id
-                                                }
+                                            <div className="photo_block-read_one">
+                                                <div className="photo_block-small_image" style={{ background:`url('${URL}/${read_one.imgsArr[stateImg[0]].url}')`}} >
+                                              
                                                 </div>
                                                 
                                                 <div style={{ display:'flex', minWidth:'50px', maxWidth:'350px', justifyContent:'space-between' }}>
                                                     {
                                                         read_one.imgsArr.map((item, index)=> <div key={item.id}>
-                                                            {item.id}
-                                                            <div onClick={ () => setImgState([index, item.id]) } style={{ background:`url('${URL}/${item.url}')`, backgroundSize:'contain', width:'50px', height:'50px', marginRight:'15px', cursor:'pointer' }}></div>
+                                                           
+                                                            <div onClick={ () => setImgState([index, item.id]) } style={{ background:`url('${URL}/${item.url}')`, backgroundSize:'cover', backgroundPosition:"center", backgroundRepeat:'no-repeat' , width:'50px', height:'50px', marginRight:'15px', cursor:'pointer' }}></div>
                                                         </div> )
                                                     }
                                                 </div>
@@ -76,7 +79,7 @@ function ReadOne() {
                                         }
                                         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center'}}>
                                             <div className={"title_p__all"}> { read_one.price && <div> <p > Цена: </p> <div> {read_one.price} Р</div> </div>} </div>
-                                            <div onClick={ onClickCart } style={{ width:'200px', height:'50px', lineHeight:'50px', fontSize:'26px', textTransform:'uppercase', cursor:'pointer', boxShadow:'#952714 3px 3px 10px', borderRadius:'25px', display:'flex', alignContent:'center', justifyContent:'center' }} > 
+                                            <div onClick={ onClickCart } className="read_one-addInCart" > 
                                                 В корзину 
                                             </div>
                                         </div>

@@ -41,7 +41,7 @@ function Cart() {
                            cartList && Array.isArray(cartList) && cartList.length > 0 ? 
                            <div>
                                {
-                               cartList.map((item, index)=> <div key={item.id} style={{ width:'500px', minHeight:'240px', display:'flex' }}>
+                               cartList.map((item, index)=> <div key={item.id+index} style={{ width:'500px', minHeight:'240px', display:'flex' }}>
                                    <div style={{ width:'400px', height:'100%' }}>
                                         <div>{item.name}</div>
                                         <div>{item.category_name}</div>
