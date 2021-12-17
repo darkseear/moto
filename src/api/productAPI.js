@@ -49,6 +49,32 @@ export const ProductsApi = {
             })
     },
 
+    uploadPrImgSome(objImg){
+        alert(JSON.stringify(objImg))
+        const conf = {
+            headers:{
+                "X-Access-Token": jwt,
+                "Content-Type": "application/json"
+            }
+        }
+
+        const photoData = new FormData();
+        // photoData.append('sendimage', objImg.sendimage, objImg.sendimage.name);
+        photoData.append('title', objImg.title);
+        for (let x = 0; x < objImg.sendimage.length; x++) {
+            photoData.append("sendimage[]", objImg.sendimage[x]);
+        }
+        
+        // alert(JSON.stringify(photoData))
+
+        return axios.post(API_URL + `uploadPrImgSome.php`, photoData, {...conf })
+            .then((res) => {
+                console.log(res.data);
+                return res.data;
+            })
+
+    },  
+
     uploadPrImg(objImg) {
         const conf = {
             headers: {

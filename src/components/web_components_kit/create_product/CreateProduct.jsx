@@ -19,7 +19,7 @@ function CreateProduct() {
     const [objImg, setObjImg] = useState({ title: '', sendimage: null });
 
     const handlePhotoInputChange = (e) => {
-        setObjImg({ ...objImg, sendimage: e.currentTarget.files[0] })
+        setObjImg({ ...objImg, sendimage: e.currentTarget.files })
     }
 
     const onChengeInputObjImg = (e) => {
@@ -134,7 +134,7 @@ function CreateProduct() {
                             </div> */}
                         </div>
                         <br />
-                        <img style={{ width: '250px', height: '250px' }} src={objImg.sendimage ? URL.createObjectURL(objImg.sendimage) : null} alt={objImg.sendimage ? objImg.sendimage.name : null} />
+                        <img style={{ width: '250px', height: '250px' }} src={objImg.sendimage ? URL.createObjectURL(objImg.sendimage[0]) : null} alt={objImg.sendimage ? objImg.sendimage.name : null} />
                     </div>
 
                     <div className="form-product__img form-product_element">

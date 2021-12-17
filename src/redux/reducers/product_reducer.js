@@ -111,13 +111,12 @@ export const getReadOne = (id) => {
 
 export const createProduct = (objImg, objProd) => {
 
-    ProductsApi.uploadPrImg(objImg)
+    ProductsApi.uploadPrImgSome(objImg)
         .then((res) => {
-            if (res.id && res.id !== null) {
-                let arr_id = Number(res.id);
-                let arr = [];
-                arr[0] = arr_id;
-                ProductsApi.createProduct({...objProd, imgsArr: JSON.stringify(arr) })
+            alert(JSON.stringify(res))
+            if ( res.id !== null  ) {
+                
+                ProductsApi.createProduct({...objProd, imgsArr: JSON.stringify(res.id) })
                     .then((res) => {
                         alert(JSON.stringify(res.message))
                     })
