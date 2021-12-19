@@ -21,16 +21,18 @@ function ProductPage({products_category_id}) {
                 </NavLink>
                 <div className="product_page-content_info">
                     <div className="content_info-product_page__container">
-                        <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
-                        <div>
-                            { item.name }
+                        <div className="content_info-product_page_one">
+                            <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
+                            <div>
+                                { item.name }
+                            </div>
+                            </NavLink>
+                            <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
+                            <div>
+                                { item.price }
+                            </div>
+                            </NavLink>
                         </div>
-                        </NavLink>
-                        <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
-                        <div>
-                            { item.price }
-                        </div>
-                        </NavLink>
                         
                         <CartButton_product/>
                         

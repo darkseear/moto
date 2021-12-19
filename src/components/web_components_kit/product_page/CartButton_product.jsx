@@ -15,8 +15,8 @@ function CartButton_product() {
 
     return (
         <>
-            <div style={{ display: 'flex' }}>
-                <div className="read_one-addInCart" style={{ fontSize: '20px', width: '150px', marginTop: '10px' }}>
+            <div style={{ display: 'flex', alignItems:'center' }}>
+                <div className="cart_button" >
                     В корзину
                 </div>
                 <div style={{ display: 'flex', height: '60px', paddingTop: '10px', width: "76px", paddingLeft: '1px', alignItems: 'center' }} >
