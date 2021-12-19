@@ -62,7 +62,7 @@ export const ProductsApi = {
         // photoData.append('sendimage', objImg.sendimage, objImg.sendimage.name);
         photoData.append('title', objImg.title);
         for (let x = 0; x < objImg.sendimage.length; x++) {
-            photoData.append("sendimage[]", objImg.sendimage[x]);
+            photoData.append(`sendimage${x}`, objImg.sendimage[x], objImg.sendimage[x].name);
         }
         
         // alert(JSON.stringify(photoData))
