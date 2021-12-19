@@ -15,7 +15,7 @@ function Stocks() {
     }, [])
 
     return (
-    <div className="recentArrivals_container">
+    <div className="recentArrivals_container" style={{ marginBottom: '20px'}}>
         <div className="recentArrivals_title">
             <p>
                 Акции

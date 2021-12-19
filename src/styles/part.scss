@@ -33,6 +33,7 @@
     font-weight: normal;
     font-size: 21px;
     line-height: 45px;
+    height: 70%;
 }
 
 .block_part_price{
@@ -41,4 +42,9 @@
     font-weight: normal;
     font-size: 21px;
     line-height: 45px;
+}
+
+.block-part_group-product{
+    width: 100%;
+    height: calc(100% - 138px);
 }

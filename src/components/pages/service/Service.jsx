@@ -11,7 +11,7 @@ function Service() {
                     <Categories />
                 </div>
                 <div>
-                    Service
+                Оказание услуг по ремонту и обслуживанию мототехники
                 </div>
             </div>
         </>

@@ -7,7 +7,7 @@ function GoBackNext() {
 
     return (
         <div >
-            <div onClick={()=>{ history.goBack() }}>  Back </div>
+            <div className="go_back-button" onClick={()=>{ history.goBack() }}> Назад </div>
         </div>
     )
 }
