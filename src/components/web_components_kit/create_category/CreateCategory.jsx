@@ -46,9 +46,6 @@ function CreateCategory() {
         dispatch(createCategoryAC(photoData))
     }
 
-   
-
-
     return (
         <div className="create_category-container bottom_margin">
             <form className="create_product-form" onSubmit={handleSubmit}>
@@ -80,7 +77,7 @@ function CreateCategory() {
                             </button> 
                         }
                         { 
-                             categoryId !== null && categoryId && categoryId !== "Новая категория" && categoryId !== ""  && <button className="form_button-submit" style={{ cursor:'pointer' }} onClick={() => dispatch(removeCategory(categoryId))} >
+                             categoryId !== null && categoryId && categoryId !== "Новая категория" && categoryId !== ""  && <button className="form_button-submit" style={{ cursor:'pointer' }} onClick={(e) => {e.preventDefault(); alert("Функция в разработке")}} >
                              Изменить категорию
                              </button>  
                         }
@@ -97,7 +94,7 @@ function CreateCategory() {
                     <div className="form-product__img form-product_element">
                         <div className="create_category-element_flex">
                             <label htmlFor="">Загрузите изображение</label>
-                            <input className="custom_input" placeholder="Pictures" type="file" onChange={(e) => { handlePhotoInputChange(e) }} />
+                            <input className="custom_input" placeholder="Pictures" type="file" onChange={(e) => { handlePhotoInputChange(e) }} required/>
                         </div>
                         <div className="create_category-element_flex">
                             <label htmlFor="">Название изображения</label>
