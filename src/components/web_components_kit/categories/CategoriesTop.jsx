@@ -16,7 +16,7 @@ function CategoriesTop() {
     return (
         <div className="categoryTop_container">
             {
-                categoryArr !== null && categoryArr !== undefined ? categoryArr.map((item) => <NavLink className="categoryTop_element" style={{ color: 'black' }} activeClassName="category_navigation_active" to={`/catalog/${item.id}`} key={item.id}>
+                categoryArr !== null && categoryArr !== undefined  && typeof categoryArr !== 'string' && !(categoryArr instanceof String)? categoryArr.map((item) => <NavLink className="categoryTop_element" style={{ color: 'black' }} activeClassName="category_navigation_active" to={`/catalog/${item.id}`} key={item.id}>
                    
                         {item.name}
                     
