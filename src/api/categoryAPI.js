@@ -28,6 +28,25 @@ export const CategoryAPI = {
             .then((res)=>{
                 return res.data;
             })
+    },
+
+    removeCategory(id){
+
+        const instance = axios.create({
+            headers: {
+                "X-Access-Token": jwt
+            }
+        })
+
+
+        return instance.delete(API_URL + `deleteCategory.php?id=${id}`)
+            .then((res)=>{
+                return res.data;
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+
     }
 
 }

@@ -35,3 +35,11 @@ export const createCategoryAC = (categoryData) => {
         alert(res.message)
     })
 }
+
+export const removeCategory = (id) => {
+    return (dispatch) => CategoryAPI.removeCategory(id)
+    .then((res)=>{
+        category()
+        alert(res)
+    })
+}

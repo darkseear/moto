@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { category, createCategoryAC } from '../../../redux/reducers/category_reducer';
+import { category, createCategoryAC, removeCategory } from '../../../redux/reducers/category_reducer';
 
 function CreateCategory() {
 
@@ -9,6 +9,8 @@ function CreateCategory() {
     const [categoryId, setCategoryId] = useState("")
     const dispatch = useDispatch()
     const { categoryArr } = useSelector( state => state.categorys )
+
+    const [state, setState] = useState({id: "", title:""})
 
     const handlePhotoInputChange = (e) => {
         setCategoryState({ ...categoryState, sendimage: e.currentTarget.files[0] })
@@ -44,6 +46,8 @@ function CreateCategory() {
         dispatch(createCategoryAC(photoData))
     }
 
+   
+
 
     return (
         <div className="create_category-container bottom_margin">
@@ -52,11 +56,14 @@ function CreateCategory() {
                     <p>Создание категории товара</p>
                 </div>
                 <div className="form_product-category ">
-                    <label htmlFor="category" > Список существующих категорий товара: </label>
+                    <label htmlFor="category" >  </label>
                     <br />
                     {
-                        categoryArr && categoryArr !== undefined ? <select name="category" value={categoryId} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) => onChengeInputCreate(e, 'category_id')} name="category" id="category" >
+                        categoryArr && categoryArr !== undefined ? <div>
+                            <select name="category" value={categoryId} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) => {onChengeInputCreate(e, 'category_id');}} name="category" id="category" >
                             <option value=""></option>
+                            <option value="Новая категория">Новая категория</option>
+
                             {
                                 categoryArr.map((item) => <option value={item.id} key={item.id}>
                                     {item.name}
@@ -65,9 +72,27 @@ function CreateCategory() {
                             }
 
                         </select>
+                        <div style={{ display:'flex', width:'750px', marginTop:'30px' }}>
+
+                        {
+                           categoryId !== null && categoryId && categoryId !== "Новая категория" && categoryId !== "" && <button className="form_button-submit" style={{ cursor:'pointer', marginRight:'30px' }} onClick={() => dispatch(removeCategory(categoryId))} >
+                            Удалить категорию
+                            </button> 
+                        }
+                        { 
+                             categoryId !== null && categoryId && categoryId !== "Новая категория" && categoryId !== ""  && <button className="form_button-submit" style={{ cursor:'pointer' }} onClick={() => dispatch(removeCategory(categoryId))} >
+                             Изменить категорию
+                             </button>  
+                        }
+                        
+                        </div>
+                       
+                        </div>
                             : <div> Loading... </div>
                     }
                 </div>
+                {
+                categoryId === "Новая категория" &&
                 <div className="create_product-wrapper create_category-wrapper">
                     <div className="form-product__img form-product_element">
                         <div className="create_category-element_flex">
@@ -93,6 +118,7 @@ function CreateCategory() {
                         </div>
                     </div>
                 </div>
+                }
                 <div>
                     <br />
                     <button className="form_button-submit" type="submit" disabled={ categoryState.name === "" ? true : false }>Загрузить категорию</button>
