@@ -31,7 +31,15 @@ export const category = () => (dispatch) => {
 export const createCategoryAC = (categoryData) => {
     return (dispatch)=> CategoryAPI.createCategory(categoryData)
     .then((res)=>{
-        category()
+        dispatch(category())
+        alert(res.message)
+    })
+}
+
+export const updateCategoryAC = (categoryData) => {
+    return (dispatch)=> CategoryAPI.updateCategory(categoryData)
+    .then((res)=>{
+        dispatch(category())
         alert(res.message)
     })
 }
@@ -39,7 +47,7 @@ export const createCategoryAC = (categoryData) => {
 export const removeCategory = (id) => {
     return (dispatch) => CategoryAPI.removeCategory(id)
     .then((res)=>{
-        category()
-        alert(res)
+        dispatch(category())
+        alert(res.message)
     })
 }

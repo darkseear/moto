@@ -30,6 +30,20 @@ export const CategoryAPI = {
             })
     },
 
+    updateCategory(category) {
+
+        const instance = axios.create({
+            headers: {
+                "X-Access-Token": jwt
+            }
+        })
+
+        return instance.post(API_URL + "updateCategory.php", category)
+            .then((res)=>{
+                return res.data;
+            })
+    },
+
     removeCategory(id){
 
         const instance = axios.create({
