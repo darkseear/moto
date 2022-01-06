@@ -1,8 +1,9 @@
 import { CharApi } from "../../api/charAPI"
 
 const DEF_CHAR = "DEF_CHAR"
+const DEF_CHAR_ID = "DEF_CHAR_ID"
 
-let initialState = { def_char: null }
+let initialState = { def_char: null, def_char_id: null }
 
 const defCharReducer = ( state = initialState, action ) => {
 
@@ -11,6 +12,13 @@ const defCharReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 def_char: action.def_char
+            }
+        }
+
+        case DEF_CHAR_ID: {
+            return {
+                ...state,
+                def_char_id: action.def_char_id
             }
         }
 
@@ -27,6 +35,17 @@ export const getChar = () => {
         dispatch({
             type:DEF_CHAR,
             def_char: res
+        })
+    })
+}
+
+export const getCharId = (id) => {
+    return (dispatch)=> CharApi.getCharId(id)
+    .then((res)=>{
+        console.log(res)
+        dispatch({
+            type:DEF_CHAR_ID,
+            def_char_id: res
         })
     })
 }

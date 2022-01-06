@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { category } from '../../../redux/reducers/category_reducer';
+import { getCharId } from '../../../redux/reducers/def_char_reducer';
 import { createProduct, uoloadImage } from '../../../redux/reducers/product_reducer';
 
 function CreateProduct() {
 
     // const [photo, setPhoto] = useState()
-    const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', characteristics: [{ Производитель: "" }, { Двигатель: "" }, { ['Мощность двигателя']: "" }, { ['Объём двигателя']: '' }, { КПП: '' }], category_id: '' })
+    const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', characteristics: [], category_id: '' })
+    const [ categoryState, setCategoryState ] = useState("")
 
     const dispatch = useDispatch()
 
     const { categoryArr } = useSelector(state => state.categorys)
+    const { def_char_id } = useSelector( state => state.def_char )
 
     useEffect(() => {
         dispatch(category())
@@ -38,14 +41,24 @@ function CreateProduct() {
     }
 
     const onChengeInputCreate = (e, name) => {
-        console.log(1)
+        // console.log(1)
+        if(name === "category_id"){
+            return setCreatProd({ ...creatProd, category_id: e.target.value })
+        }
+        for(let i = 0; i < def_char_id.length; i++){
+                if (def_char_id[i].name === name) {
+                    console.log(2)
+                    let arrCharacteristics = creatProd.characteristics;
+                    arrCharacteristics[i].description = e.target.value;
+                   return setCreatProd({ ...creatProd, characteristics: arrCharacteristics})
+                }
+        }
+            
         switch (name) {
             case "brand": {
-                console.log(2)
                 return setCreatProd({ ...creatProd, brand: e.target.value })
             }
             case 'name': {
-                console.log(3)
                 return setCreatProd({ ...creatProd, name: e.target.value })
             }
             case 'price': {
@@ -54,41 +67,33 @@ function CreateProduct() {
             case 'description': {
                 return setCreatProd({ ...creatProd, description: e.target.value })
             }
-            case 'Производитель': {
-                let arrTest = creatProd.characteristics;
-                arrTest[0].Производитель = e.target.value;
-                return setCreatProd({ ...creatProd, characteristics: arrTest })
-            }
-            case 'Двигатель': {
-                let arrTest = creatProd.characteristics;
-                arrTest[1].Двигатель = e.target.value;
-                return setCreatProd({ ...creatProd, characteristics: arrTest })
-            }
-            case 'Мощность двигателя': {
-                let arrTest = creatProd.characteristics;
-                arrTest[2]['Мощность двигателя'] = e.target.value;
-                return setCreatProd({ ...creatProd, characteristics: arrTest })
-            }
-            case 'Объём двигателя': {
-                let arrTest = creatProd.characteristics;
-                arrTest[3]['Объём двигателя'] = e.target.value;
-                return setCreatProd({ ...creatProd, characteristics: arrTest })
-            }
-            case 'КПП': {
-                let arrTest = creatProd.characteristics;
-                arrTest[4].КПП = e.target.value;
-                return setCreatProd({ ...creatProd, characteristics: arrTest })
-            }
-            case 'category_id': {
-                return setCreatProd({ ...creatProd, category_id: e.target.value })
-            }
-
             default: {
                 console.log(3)
                 setCreatProd({ ...creatProd })
             }
         }
     }
+
+    useEffect(() => {
+        if(categoryState !== "" && categoryState !== null) {
+            dispatch(getCharId(categoryState))
+        }
+       if(categoryState === "" || categoryState === null) setCategoryState(null)
+    }, [categoryState])
+
+    useEffect(() => {
+        if(categoryState !== "" && categoryState !== null) {
+            if(def_char_id && def_char_id !== null) { 
+                let arrCharacteristics = [];
+                def_char_id.map((item)=> {
+                     return arrCharacteristics.push({ name: item.name, description: item.value })
+                })
+                // console.log( "arrNew:" + JSON.stringify(arrCharacteristics))
+                setCreatProd({ ...creatProd, characteristics: arrCharacteristics })
+            }
+        }
+       if(categoryState === "" || categoryState === null) setCategoryState(null)
+    }, [def_char_id])
 
     return (
         <div className="create_product-container bottom_margin">
@@ -101,13 +106,12 @@ function CreateProduct() {
                     <label htmlFor="category" > Категория товара: </label>
                     <br />
                     {
-                        categoryArr && categoryArr !== undefined ? <select name="category" value={creatProd.category_id} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) => onChengeInputCreate(e, 'category_id')} name="category" id="category" required>
+                        categoryArr && categoryArr !== undefined ? <select name="category" value={creatProd.category_id} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) =>{ onChengeInputCreate(e, 'category_id');  setCategoryState(e.target.value) }} name="category" id="category" required>
                             <option value="" ></option>
                             {
                                 categoryArr.map((item) => <option value={item.id} key={item.id}>
                                     {item.name}
                                 </option>)
-
                             }
 
                         </select>
@@ -124,6 +128,7 @@ function CreateProduct() {
                                 <br />
                                 <input type="file" name="photo" multiple onChange={handlePhotoInputChange} required />
                             </div>
+                            <br />
                             <div>
                                 <label htmlFor="title"> Название изображения </label>
                                 <br />
@@ -142,17 +147,17 @@ function CreateProduct() {
                         <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="brand" > Бренд товара: </label>
-                            <input className="custom_input" placeholder="Brand" name="brand" type="text" value={creatProd.brand} onChange={(e) => onChengeInputCreate(e, "brand")} required />
+                            <input className="custom_input" placeholder="" name="brand" type="text" value={creatProd.brand} onChange={(e) => onChengeInputCreate(e, "brand")} required />
                         </div>
                         <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="name" > Название товара: </label>
-                            <input className="custom_input" placeholder="Name" name="name" id="name" value={creatProd.name} onChange={(e) => onChengeInputCreate(e, "name")} required />
+                            <input className="custom_input" placeholder="" name="name" id="name" value={creatProd.name} onChange={(e) => onChengeInputCreate(e, "name")} required />
                         </div>
                         <br />
                         <div className="create_category-element_flex">
                             <label htmlFor="price" > Цена: </label>
-                            <input className="custom_input" placeholder="Price" name="price" id="price" value={creatProd.price} onChange={(e) => onChengeInputCreate(e, "price")} required />
+                            <input className="custom_input" placeholder="" name="price" id="price" value={creatProd.price} onChange={(e) => onChengeInputCreate(e, "price")} required />
                         </div>
                         <br />
                         <div className="create_category-element_flex">
@@ -167,6 +172,24 @@ function CreateProduct() {
                             Характеристики :
                         </div>
                         <br />
+
+                            {
+                                creatProd.characteristics !== null && creatProd.characteristics  ? 
+                                
+                                creatProd.characteristics.map((item, index) => <div key={item.id}>
+                                        <div className="create_category-element_flex">
+                                            <label htmlFor="brand" > { item.name } </label>
+                                        {
+                                            creatProd.characteristics[index] && creatProd.characteristics[index] !== undefined && creatProd.characteristics[index] !== null && <input className="custom_input"  name={item.name} type="text" value={creatProd.characteristics[index].description} onChange={(e) => onChengeInputCreate(e, item.name)} required /> 
+                                            
+                                            }
+                                        </div>
+                                        <br />
+                                    </div> )
+                                 :
+                                  <div>Loading...</div>
+                            }
+{/* 
                         <div>
                             <label htmlFor="proisvod" > Производитель: </label>
                             <br />
@@ -191,7 +214,8 @@ function CreateProduct() {
                             <label htmlFor="КПП" > КПП: </label>
                             <br />
                             <input className="custom_input" placeholder="КПП" name="" id="" value={creatProd.characteristics.КПП} onChange={(e) => onChengeInputCreate(e, 'КПП')} />
-                        </div>
+                        </div> */}
+
 
                     </div>
 
