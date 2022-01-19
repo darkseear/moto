@@ -38,7 +38,7 @@ export const CharApi = {
 
         return instance.post(API_URL + "createChar.php", defChar)
             .then((res)=>{
-                return res.data;
+                return res;
             })
             .catch((err)=>{
                 console.log(err)
@@ -55,7 +55,7 @@ export const CharApi = {
 
         return instance.put(API_URL + "updateChar.php", defChar)
             .then((res)=>{
-                return res.data;
+                return res;
             })
             .catch((err)=>{
                 console.log(err)
@@ -71,9 +71,25 @@ export const CharApi = {
         })
 
 
-        return instance.delete(API_URL + `getChar.php?category_id=${id}`)
+        return instance.get(API_URL + `getChar.php?category_id=${id}`)
             .then((res)=>{
                 return res.data;
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    },
+
+    removeChar(id){
+        const instance = axios.create({
+            headers: {
+                "X-Access-Token": jwt
+            }
+        })
+
+        return instance.post(API_URL + `deleteChar.php`, { id })
+            .then((res)=>{
+                return res;
             })
             .catch((err)=>{
                 console.log(err)

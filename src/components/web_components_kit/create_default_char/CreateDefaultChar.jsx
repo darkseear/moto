@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { category, createCategoryAC, removeCategory } from '../../../redux/reducers/category_reducer';
-import { createChar, getChar, updateChar } from '../../../redux/reducers/def_char_reducer';
+import { createChar, getChar, removeChar, updateChar } from '../../../redux/reducers/def_char_reducer';
 
 function CreateDefaultChar() {
 
@@ -34,6 +34,7 @@ function CreateDefaultChar() {
         e.preventDefault();
         if(!configUpdate.update) dispatch(createChar(defCharLoc))
         if(configUpdate.update) dispatch(updateChar(defCharLoc))
+        setConfigId("");
         
     }
     useEffect(() => {
@@ -55,22 +56,7 @@ function CreateDefaultChar() {
         }
     }, [configId])
 
-    // useEffect(() => {
-    //     if(configUpdate.configId === null){
-    //         setDefCharLoc({ category_id:'', name:'', value:''})
-    //     } else {
-    //         // def_char && def_char !== null && setDefCharLoc( { category_id: , name: , value: } )
-    //         console.log(configIndex)
-    //         console.log(def_char)
-    //         let dc = def_char[configIndex];
-    //         console.log(dc)
-    //         dc && dc !== null && setDefCharLoc({ category_id: dc.category_id,  name: dc.name, value: dc.value })
-    //     }
-    // }, [configUpdate.update])
-
-    const onChengeInputCreate = (e, variant) => {
-        
-    }
+  
 
     return (
         <div className="create_category-container bottom_margin">
@@ -192,7 +178,10 @@ function CreateDefaultChar() {
                             </div>
                             <div>
                                 <br />
-                                <button className="form_button-submit" type="button" onClick={() => alert("метод не создан !!!")}>Удалить</button>
+                                <button className="form_button-submit" type="button" onClick={() => {
+                                                                                                    dispatch(removeChar(configId));
+                                                                                                    setConfigId("");
+                                                                                                }}>Удалить</button>
                                 <br />
                             </div>
                         </div>

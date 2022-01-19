@@ -50,20 +50,20 @@ export const getCharId = (id) => {
     })
 }
 
-// export const removeChar = () => {
-//     return (dispatch)=> CharApi.removeChar()
-//     .then((res)=>{
-//         dispatch({
-//             type:DEF_CHAR,
-//             def_char: res
-//         })
-//     })
-// }
+export const removeChar = (id) => {
+    return (dispatch)=> CharApi.removeChar(id)
+    .then((res)=>{
+        
+        if(res.status === 200)dispatch(getChar())
+    })
+}
 
 export const createChar = (defChar) => {
     return (dispatch) => CharApi.createChar(defChar)
     .then((res)=>{
-        if(res.status === "200"){
+        debugger
+        if(res.status === 201){
+            
             dispatch(getChar())
         }
     })
@@ -72,7 +72,7 @@ export const createChar = (defChar) => {
 export const updateChar = (defChar) => {
     return (dispatch) => CharApi.updateChar(defChar)
     .then((res)=>{
-        if(res.status === "200"){
+        if(res.status === 200){
             dispatch(getChar())
         }
     })
