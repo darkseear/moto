@@ -70,13 +70,13 @@ export const CharApi = {
             }
         })
 
-
         return instance.get(API_URL + `getChar.php?category_id=${id}`)
             .then((res)=>{
                 return res.data;
             })
             .catch((err)=>{
                 console.log(err)
+                return {}
             })
     },
 

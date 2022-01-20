@@ -6,6 +6,15 @@ import { createProduct, uoloadImage } from '../../../redux/reducers/product_redu
 
 function CreateProduct() {
 
+    function isEmptyObject(obj) {
+        for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // const [photo, setPhoto] = useState()
     const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', characteristics: [], category_id: '' })
     const [ categoryState, setCategoryState ] = useState("")
@@ -85,11 +94,15 @@ function CreateProduct() {
         if(categoryState !== "" && categoryState !== null) {
             if(def_char_id && def_char_id !== null) { 
                 let arrCharacteristics = [];
-                def_char_id.map((item)=> {
-                     return arrCharacteristics.push({ name: item.name, description: item.value })
-                })
-                // console.log( "arrNew:" + JSON.stringify(arrCharacteristics))
-                setCreatProd({ ...creatProd, characteristics: arrCharacteristics })
+               if( def_char_id){ 
+                    def_char_id.map((item)=> {
+                        return arrCharacteristics.push({ name: item.name, description: item.value })
+                    })
+                    // console.log( "arrNew:" + JSON.stringify(arrCharacteristics))
+                    setCreatProd({ ...creatProd, characteristics: arrCharacteristics })
+                } else {
+                    setCreatProd({ ...creatProd, characteristics: arrCharacteristics })
+                }
             }
         }
        if(categoryState === "" || categoryState === null) setCategoryState(null)
