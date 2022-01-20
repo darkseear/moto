@@ -34,8 +34,7 @@ function CreateDefaultChar() {
         e.preventDefault();
         if(!configUpdate.update) dispatch(createChar(defCharLoc))
         if(configUpdate.update) dispatch(updateChar(defCharLoc))
-        setConfigId("");
-        
+        setConfigId("");   
     }
     useEffect(() => {
         if(configId === "" || configId === "Новая конфигурация") {
@@ -50,7 +49,8 @@ function CreateDefaultChar() {
             def_char && def_char !== null && def_char[configIndex[configId]] && def_char[configIndex[configId]] !== null && setDefCharLoc({
                 category_id:def_char[configIndex[configId]].category_id, 
                 name:def_char[configIndex[configId]].name,
-                value:def_char[configIndex[configId]].value
+                value:def_char[configIndex[configId]].value,
+                category_id:configId
             })
             console.log(def_char[configIndex[configId]].value)
         }
@@ -140,16 +140,13 @@ function CreateDefaultChar() {
                                 
                                     categoryArr && categoryArr !== undefined && 
                                     <select name="def_char" value={defCharLoc.category_id} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) => { setDefCharLoc({...defCharLoc , category_id: e.target.value}) }}  >
-                                    <option value=""></option>
-        
-                                    {
-                                        categoryArr.map((item) => <option value={item.id} key={item.id}>
-                                            {item.name}
-                                        </option>)
-        
-                                    }
-        
-                                        </select>
+                                        <option value=""></option>
+                                        {
+                                            categoryArr.map((item) => <option value={item.id} key={item.id}>
+                                                {item.name}
+                                            </option>)
+                                        }
+                                    </select>
                                         
                                 }
                            </div>
