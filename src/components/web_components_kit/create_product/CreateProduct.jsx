@@ -22,7 +22,7 @@ function CreateProduct() {
     const dispatch = useDispatch()
 
     const { categoryArr } = useSelector(state => state.categorys)
-    const { def_char_id } = useSelector( state => state.def_char )
+    const { def_char_id , def_char} = useSelector( state => state.def_char )
 
     useEffect(() => {
         dispatch(category())
@@ -88,14 +88,14 @@ function CreateProduct() {
             dispatch(getCharId(categoryState))
         }
        if(categoryState === "" || categoryState === null) setCategoryState(null)
-    }, [categoryState])
+    }, [categoryState, def_char])
 
     useEffect(() => {
         if(categoryState !== "" && categoryState !== null) {
             if(def_char_id && def_char_id !== null) { 
                 let arrCharacteristics = [];
-               if( def_char_id){ 
-                    def_char_id.map((item)=> {
+               if( !isEmptyObject(def_char_id)){ 
+                    def_char_id.forEach((item)=> {
                         return arrCharacteristics.push({ name: item.name, description: item.value })
                     })
                     // console.log( "arrNew:" + JSON.stringify(arrCharacteristics))
@@ -106,7 +106,7 @@ function CreateProduct() {
             }
         }
        if(categoryState === "" || categoryState === null) setCategoryState(null)
-    }, [def_char_id])
+    }, [def_char_id, def_char])
 
     return (
         <div className="create_product-container bottom_margin">
@@ -122,7 +122,7 @@ function CreateProduct() {
                         categoryArr && categoryArr !== undefined ? <select name="category" value={creatProd.category_id} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) =>{ onChengeInputCreate(e, 'category_id');  setCategoryState(e.target.value) }} name="category" id="category" required>
                             <option value="" ></option>
                             {
-                                categoryArr.map((item) => <option value={item.id} key={item.id}>
+                                categoryArr.map((item) => <option value={item.id} key={item.id + Math.random()}>
                                     {item.name}
                                 </option>)
                             }
@@ -187,9 +187,9 @@ function CreateProduct() {
                         <br />
 
                             {
-                                creatProd.characteristics !== null && creatProd.characteristics  ? 
+                                creatProd.characteristics !== null && creatProd.characteristics &&  creatProd.characteristics.length !== 0 ? 
                                 
-                                creatProd.characteristics.map((item, index) => <div key={item.id}>
+                                creatProd.characteristics.map((item, index) => <div key={item.id + Math.random()}>
                                         <div className="create_category-element_flex">
                                             <label htmlFor="brand" > { item.name } </label>
                                         {
@@ -200,36 +200,8 @@ function CreateProduct() {
                                         <br />
                                     </div> )
                                  :
-                                  <div>Loading...</div>
+                                  <div>Создайте характеристику</div>
                             }
-{/* 
-                        <div>
-                            <label htmlFor="proisvod" > Производитель: </label>
-                            <br />
-                            <input className="custom_input" placeholder="Производитель" name="proizvod" id="proizvod" value={creatProd.characteristics.Производитель} onChange={(e) => onChengeInputCreate(e, "Производитель")} required />
-                        </div>
-                        <div>
-                            <label htmlFor="dvigatel" > Двигатель: </label>
-                            <br />
-                            <input className="custom_input" placeholder="Двигатель" name="dvigatel" id="dvigatel" value={creatProd.characteristics.Двигатель} onChange={(e) => onChengeInputCreate(e, "Двигатель")} required />
-                        </div>
-                        <div>
-                            <label htmlFor="sila_dvigatel" > Мощность двигателя: </label>
-                            <br />
-                            <input className="custom_input" placeholder="Мощность двигателя" name="sila_dvigatel" id="sila_dvigatel" value={creatProd.characteristics['Мощность двигателя']} onChange={(e) => onChengeInputCreate(e, 'Мощность двигателя')} required />
-                        </div>
-                        <div>
-                            <label htmlFor="Объём двигателя" > Объём двигателя: </label>
-                            <br />
-                            <input className="custom_input" placeholder="Объём двигателя" name="v_dvigatel" id="v_dvigatel" value={creatProd.characteristics['Объём двигателя']} onChange={(e) => onChengeInputCreate(e, 'Объём двигателя')} required />
-                        </div>
-                        <div>
-                            <label htmlFor="КПП" > КПП: </label>
-                            <br />
-                            <input className="custom_input" placeholder="КПП" name="" id="" value={creatProd.characteristics.КПП} onChange={(e) => onChengeInputCreate(e, 'КПП')} />
-                        </div> */}
-
-
                     </div>
 
                 </div>

@@ -54,27 +54,26 @@ export const removeChar = (id) => {
     return (dispatch)=> CharApi.removeChar(id)
     .then((res)=>{
         
-        if(res.status === 200)dispatch(getChar())
+        dispatch(getChar())
     })
 }
 
 export const createChar = (defChar) => {
     return (dispatch) => CharApi.createChar(defChar)
     .then((res)=>{
-        debugger
-        if(res.status === 201){
+        
             
             dispatch(getChar())
-        }
+    
     })
 }
 
 export const updateChar = (defChar) => {
     return (dispatch) => CharApi.updateChar(defChar)
     .then((res)=>{
-        if(res.status === 200){
+      
             dispatch(getChar())
-        }
+    
     })
 }
 
