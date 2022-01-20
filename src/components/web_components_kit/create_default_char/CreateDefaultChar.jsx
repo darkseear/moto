@@ -50,7 +50,7 @@ function CreateDefaultChar() {
                 category_id:def_char[configIndex[configId]].category_id, 
                 name:def_char[configIndex[configId]].name,
                 value:def_char[configIndex[configId]].value,
-                category_id:configId
+                id:configId
             })
             console.log(def_char[configIndex[configId]].value)
         }
