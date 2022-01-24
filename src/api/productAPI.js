@@ -110,6 +110,21 @@ export const ProductsApi = {
             })
     },
 
+    createProductTest(objProd) {
+
+        const instance = axios.create({
+            headers: {
+                "X-Access-Token": jwt
+            }
+        })
+
+        return instance.post(API_URL + `createProductTest.php`, objProd)
+            .then((res) => {
+                console.log(res.data);
+                return res.data;
+            })
+    },
+
     updateProduct(objProd) {
 
         const instance = axios.create({
@@ -119,6 +134,21 @@ export const ProductsApi = {
         })
 
         return instance.put(API_URL + `update.php`, objProd)
+            .then((res) => {
+                console.log(res.data)
+                return res.data
+            })
+    },
+
+    updateProductTest(objProd) {
+
+        const instance = axios.create({
+            headers: {
+                'X-Access-Token': jwt
+            }
+        })
+
+        return instance.put(API_URL + `updateTest.php`, objProd)
             .then((res) => {
                 console.log(res.data)
                 return res.data

@@ -8,6 +8,7 @@ import Home from '../pages/home/Home'
 import Login from '../pages/login/Login'
 import Museum from '../pages/museum/Museum'
 import ReadOne from '../pages/read_one/ReadOne'
+import ReadOneTest from '../pages/read_one/ReadOneTest'
 import Registration from '../pages/registration/Registration'
 import Service from '../pages/service/Service'
 
@@ -31,7 +32,7 @@ function ContentBody() {
                     <Catalog/>
                 </Route>
                 <Route path="/read_one/:id">
-                    <ReadOne />
+                    <ReadOneTest />
                 </Route>
                 <Route path="/login">
                     <Login />

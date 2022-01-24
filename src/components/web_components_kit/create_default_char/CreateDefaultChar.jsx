@@ -32,18 +32,20 @@ function CreateDefaultChar() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        // setConfigId("");
         if(!configUpdate.update) dispatch(createChar(defCharLoc))
         if(configUpdate.update) dispatch(updateChar(defCharLoc))
         setConfigId("");   
     }
     useEffect(() => {
-        if(configId === "" || configId === "Новая конфигурация") {
+        if(configId === "" || configId === "Новая характеристика") {
             setConfigUpdate({ update:false, configId:null })
             setDefCharLoc({
                 category_id: '', 
                 name:'',
                 value:''
             })
+            console.log(configId)
         } else {
             setConfigUpdate({ update: true, configId: configId })
             def_char && def_char !== null && def_char[configIndex[configId]] && def_char[configIndex[configId]] !== null && setDefCharLoc({
@@ -62,14 +64,14 @@ function CreateDefaultChar() {
         <div className="create_category-container bottom_margin">
              <form className="create_product-form" onSubmit={handleSubmit}>
                 <div className="title_element">
-                    <p>Создать конфигурацию товара</p>
+                    <p>Создать характеристику товара</p>
                 </div>
                 <div className="form_product-category ">
                 <div>
-                        <select style={{ width: '310px', height: '40px', fontSize: '20px' }} name="def_cghar_all" id="def_char_all" onChange={(e)=> {setConfigId(e.target.value);}}>
+                        <select style={{ width: '310px', height: '40px', fontSize: '20px' }} name="def_cghar_all" id="def_char_all" value={configId} onChange={(e)=> {setConfigId(e.target.value);}}>
 
                             <option value=""></option>
-                            <option value="Новая конфигурация">Новая конфигурация</option>
+                            <option value="Новая характеристика">Новая характеристика</option>
                             {
                                 def_char && def_char !== undefined && def_char.map((item) => <option value={item.id} key={item.id}>
                                     {item.name}
@@ -80,14 +82,14 @@ function CreateDefaultChar() {
                 <div className="create_product-wrapper create_category-wrapper">
                     
                 {    
-                  configId === "Новая конфигурация" &&  <div className="form-product__img form-product_element">
+                  configId === "Новая характеристика" &&  <div className="form-product__img form-product_element">
                       <div>
-                          Новая конфигурация: 
+                          Новая характеристика: 
                           {/* { def_char && def_char !== null  && configUpdate && configUpdate.configId !== null && configUpdate !== null && configIndex!==undefined  && configIndex  !== null && def_char[configIndex[configUpdate.configId]]} */}
                       </div>
                       <br />
                         <div className="create_category-element_flex">
-                           <label  htmlFor="name_category">Категория конфигурации</label>
+                           <label  htmlFor="name_category">Категория характеристики</label>
                            
                                <div>
                                 {   categoryArr && categoryArr !== undefined && 
@@ -107,7 +109,7 @@ function CreateDefaultChar() {
                         </div>
                         <br />
                         <div className="create_category-element_flex">
-                           <label  htmlFor="name_category">Наименование конфигурации</label>
+                           <label  htmlFor="name_category">Наименование характеристики</label>
                             <input className="custom_input" type="text" id="name_category" name="name_category" onChange={ (e) => setDefCharLoc({ ...defCharLoc, name:e.target.value }) } required/> 
                         </div>
                         <br />
@@ -128,13 +130,13 @@ function CreateDefaultChar() {
                 <div className="form-product__img form-product_element">
 
                       <div>
-                          Редактирование конфигурации: 
+                          Редактирование характеристики: 
                       </div>
 
                       <br />
 
                         <div className="create_category-element_flex">
-                           <label  htmlFor="name_category">Категория конфигурации</label>
+                           <label  htmlFor="name_category">Категория характеристики</label>
                           <div> 
                                 {
                                 

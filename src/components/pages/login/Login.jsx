@@ -6,6 +6,7 @@ import { logout } from '../../../redux/reducers/auth_reducer'
 import CreateCategory from '../../web_components_kit/create_category/CreateCategory'
 import CreateDefaultChar from '../../web_components_kit/create_default_char/CreateDefaultChar'
 import CreateProduct from '../../web_components_kit/create_product/CreateProduct'
+import CreateProductTest from '../../web_components_kit/create_product/CreateProductTest'
 import LoginForm from '../../web_components_kit/login_form/LoginForm'
 import PageTitle from '../../web_components_kit/page_title/PageTitle'
 
@@ -32,7 +33,7 @@ function Login() {
                     :
                     
                     <div>
-                        <CreateProduct/>
+                        <CreateProductTest/>
                         <CreateDefaultChar/>
                         <CreateCategory/>
                         <div onClick={ logoutButton }> 

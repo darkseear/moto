@@ -109,6 +109,15 @@ export const getReadOne = (id) => {
     })
 }
 
+export const remuveReadOne = () =>{
+    return (dispatch) => {
+        dispatch({
+            type: READ_ONE,
+            read_one: null
+        })
+    }
+}
+
 export const createProduct = (objImg, objProd) => {
 
     ProductsApi.uploadPrImgSome(objImg)
@@ -117,6 +126,21 @@ export const createProduct = (objImg, objProd) => {
             if ( res.id !== null  ) {
                 
                 ProductsApi.createProduct({...objProd, imgsArr: JSON.stringify(res.id) })
+                    .then((res) => {
+                        alert(JSON.stringify(res.message))
+                    })
+            } else {
+                alert(JSON.stringify(res));
+            }
+        })
+}
+
+export const createProductTest = (objImg, objProd) => {
+    ProductsApi.uploadPrImgSome(objImg)
+        .then((res) => {
+            alert(JSON.stringify(res))
+            if ( res.id !== null  ) {
+                ProductsApi.createProductTest({...objProd, imgsArr: JSON.stringify(res.id) })
                     .then((res) => {
                         alert(JSON.stringify(res.message))
                     })

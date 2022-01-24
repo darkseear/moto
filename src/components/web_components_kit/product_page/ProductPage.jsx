@@ -13,11 +13,10 @@ function ProductPage({products_category_id}) {
                 <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
                 
                 <div className="product_page-photo_container">
-                    <div className="photo_container-product_page__photo" style={item.imgsArr && item.imgsArr[1] !== undefined ? { background:`url('http://xn--k1acecair0j.xn--p1ai/${item.imgsArr[1].url}')`, backgroundSize: 'cover', backgroundRepeat:'no-repeat'}: { background:`url('${plaseholder_image}')`, backgroundSize: 'cover', backgroundRepeat:'no-repeat' } }>
+                    <div className="photo_container-product_page__photo" style={item.imgsArr && item.imgsArr[0] !== undefined ? { background:`url('http://xn--k1acecair0j.xn--p1ai/${item.imgsArr[0].url}')`, backgroundSize: 'cover', backgroundRepeat:'no-repeat'}: { background:`url('${plaseholder_image}')`, backgroundSize: 'cover', backgroundRepeat:'no-repeat' } }>
 
                     </div>
                 </div>
-
                 </NavLink>
                 <div className="product_page-content_info">
                     <div className="content_info-product_page__container">

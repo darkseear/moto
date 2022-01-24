@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { category } from '../../../redux/reducers/category_reducer';
 import { getCharId } from '../../../redux/reducers/def_char_reducer';
-import { createProduct, uoloadImage } from '../../../redux/reducers/product_reducer';
+import { createProduct, createProductTest, uoloadImage } from '../../../redux/reducers/product_reducer';
 
-function CreateProduct() {
+function CreateProductTest() {
 
     function isEmptyObject(obj) {
         for (var i in obj) {
@@ -16,7 +16,8 @@ function CreateProduct() {
     }
 
     // const [photo, setPhoto] = useState()
-    const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', characteristics: [], category_id: '' })
+    // const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', characteristics: [], category_id: '' })
+    const [creatProd, setCreatProd] = useState({ brand: '', name: '', price: '', description: '', char:[], category_id: '' })
     const [ categoryState, setCategoryState ] = useState("")
 
     const dispatch = useDispatch()
@@ -46,7 +47,8 @@ function CreateProduct() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        createProduct(objImg, { ...creatProd, characteristics: JSON.stringify(creatProd.characteristics) });
+        // createProduct(objImg, { ...creatProd, characteristics: JSON.stringify(creatProd.characteristics) });
+        createProductTest(objImg, { ...creatProd, characteristics: '[]'});
     }
 
     const onChengeInputCreate = (e, name) => {
@@ -96,15 +98,16 @@ function CreateProduct() {
                 let arrCharacteristics = [];
                if( !isEmptyObject(def_char_id)){ 
                     def_char_id.forEach((item)=> {
-                        return arrCharacteristics.push({ name: item.name, description: item.value })
+                        return arrCharacteristics.push({ name: item.name, value: item.value })
                     })
                     // console.log( "arrNew:" + JSON.stringify(arrCharacteristics))
-                    setCreatProd({ ...creatProd, characteristics: arrCharacteristics })
+                    setCreatProd({ ...creatProd, char: arrCharacteristics })
                 } else {
-                    setCreatProd({ ...creatProd, characteristics: arrCharacteristics })
+                    setCreatProd({ ...creatProd, char: arrCharacteristics })
                 }
             }
         }
+        
        if(categoryState === "" || categoryState === null) setCategoryState(null)
     }, [def_char_id, def_char])
 
@@ -187,13 +190,13 @@ function CreateProduct() {
                         <br />
 
                             {
-                                creatProd.characteristics !== null && creatProd.characteristics &&  creatProd.characteristics.length !== 0 ? 
+                                creatProd.char !== null && creatProd.char &&  creatProd.char.length !== 0 ? 
                                 
-                                creatProd.characteristics.map((item, index) => <div key={ Math.random()}>
+                                creatProd.char.map((item, index) => <div key={ Math.random()}>
                                         <div className="create_category-element_flex">
-                                            <label htmlFor="brand" > { item.name } </label>
+                                            <label htmlFor={ item.name } > { item.name } </label>
                                         {
-                                            creatProd.characteristics[index] && creatProd.characteristics[index] !== undefined && creatProd.characteristics[index] !== null && <input className="custom_input"  name={item.name} type="text" value={creatProd.characteristics[index].description} onChange={(e) => onChengeInputCreate(e, item.name)} required /> 
+                                            creatProd.char[index] && creatProd.char[index] !== undefined && creatProd.char[index] !== null && <input className="custom_input"  name={item.name} type="text" value={creatProd.char[index].value} onChange={(e) => setCreatProd({ ...creatProd, [item.name]: e.target.value})} required /> 
                                             
                                             }
                                         </div>
@@ -217,4 +220,4 @@ function CreateProduct() {
     )
 }
 
-export default CreateProduct
+export default CreateProductTest
