@@ -7,6 +7,7 @@ import CreateCategory from '../../web_components_kit/create_category/CreateCateg
 import CreateDefaultChar from '../../web_components_kit/create_default_char/CreateDefaultChar'
 import CreateProduct from '../../web_components_kit/create_product/CreateProduct'
 import CreateProductTest from '../../web_components_kit/create_product/CreateProductTest'
+import ListProduct from '../../web_components_kit/list_product/ListProduct'
 import LoginForm from '../../web_components_kit/login_form/LoginForm'
 import PageTitle from '../../web_components_kit/page_title/PageTitle'
 
@@ -34,6 +35,7 @@ function Login() {
                     
                     <div>
                         <CreateProductTest/>
+                        <ListProduct />
                         <CreateDefaultChar/>
                         <CreateCategory/>
                         <div onClick={ logoutButton }> 

@@ -150,6 +150,13 @@ export const createProductTest = (objImg, objProd) => {
         })
 }
 
+export const deleteProduct = (id) => {
+    return (dispatch) => ProductsApi.deleteProduct(id)
+        .then((res)=>{
+            alert(JSON.stringify(res))
+        })
+}
+
 export const uoloadImage = (objImg) => {
 
     ProductsApi.uploadPrImg(objImg)

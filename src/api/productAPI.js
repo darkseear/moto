@@ -153,6 +153,24 @@ export const ProductsApi = {
                 console.log(res.data)
                 return res.data
             })
+    },
+
+    deleteProduct(id){
+        
+        const instance = axios.create({
+            headers: {
+                'X-Access-Token': jwt
+            }
+        })
+
+        return instance.post(API_URL + `/delete.php`, {id:id})
+            .then((res) => {
+                console.log(res.data)
+                return res.data
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
 }
