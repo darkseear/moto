@@ -3,7 +3,95 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { category } from '../../../redux/reducers/category_reducer';
-import { deleteProduct, products } from '../../../redux/reducers/product_reducer';
+import { deleteProduct, products, updateProduct } from '../../../redux/reducers/product_reducer';
+
+
+function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
+
+    const [hidden, setHidden] = useState(false)
+    const [update, setUpdate] = useState(false)
+    const [updateObj, setUpdateObj] = useState({ ...item })
+
+        console.log(updateObj)
+
+        const handleSubmit = (e) =>{
+            e.preventDefault();
+            dispatch(updateProduct(updateObj, selectState))
+            setUpdate(false)
+        }
+
+    return (
+            <div key={item.id} className='element_products-list_element'>
+                <div className='element_products-list_element__container'>
+                                <div>
+                                    <div>{ item.name }</div>
+                                    <div>
+                                        {
+                                        item.brand  && <div>
+                                            Производитель: 
+                                            { item.brand }
+                                        </div>
+                                        
+                                        }
+                                    </div>
+                                </div>
+                                <div className='element-list_button'>
+                                    <div className='element-list_button-hidden' onClick={()=>setHidden(!hidden)}>
+                                        {
+                                            !hidden ? "Развернуть" : "Свернуть"
+                                        }
+                                    </div   >
+                                    <div>
+                                        <div onClick={()=> dispatch(deleteProduct(item.id, selectState))}>Удалить (X)</div>
+                                        <div onClick={()=> setUpdate(!update) } >
+                                            {
+                                                !update ? "Редактировать" : "Не редактировать"
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                </div>
+                {
+                    hidden && <form className='info_update_block-element_product' onSubmit={handleSubmit}>
+                        <div className="input_container-element_product">
+                            <label>Название</label>
+                            <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/>
+                        </div>
+                        <div className="input_container-element_product">
+                            <label>Производитель</label>
+                            <input value={updateObj.brand} onChange={(e)=> setUpdateObj({...updateObj, brand: e.target.value})} type="text" disabled={!update}/>
+                        </div>
+                        <div className="input_container-element_product">
+                            <label>Цена</label>
+                            <input value={updateObj.price} onChange={(e)=> setUpdateObj({...updateObj, price: e.target.value})} type="text" disabled={!update}/>
+                        </div>
+
+                        <button className='form_button-submit' type='submit'>Update</button>
+                    </form>
+                }
+                                
+            </div>
+    )
+}
+
+function ListElement({products_category_id , dispatch, deleteProduct, selectState}){
+
+    return(
+        <>
+            <div className="list_element">
+                    {
+                        products_category_id && 
+                        products_category_id !== null ?
+                        products_category_id.map((item)=> <ProductionListElement key={item.id} dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item}/>
+                        )
+                        :
+                        <div>Нет товара</div>
+                    }
+                </div>
+        </>
+    )
+}
+
 
 function ListProduct() {
 
@@ -34,7 +122,7 @@ function ListProduct() {
     return (
         <>
             <div className="create_product-container bottom_margin">
-                <form className="create_product-form" onSubmit={handleSubmit} action="">
+                <div className="create_product-form" >
                 <div className="title_element">
                     <p>Список товаров</p>
                 </div>
@@ -54,36 +142,11 @@ function ListProduct() {
                      }
                 </div>
 {
-                flag && <div className="list_element">
-                    {
-                        products_category_id && 
-                        products_category_id !== null ?
-                        products_category_id.map((item)=> <div key={item.id} className='element_products-list_element'>
-                                <div>
-                                    <div>{ item.name }</div>
-                                    <div>
-                                        {
-                                        item.brand  && <div>
-                                            Производитель: 
-                                            { item.brand }
-                                        </div>
-                                        
-                                        }
-                                    </div>
-                                </div>
-                                <div>
-                                    <div onClick={()=> dispatch(deleteProduct(item.id))}>Удалить (X)</div>
-                                    <div>Обновить</div>
-                                </div>
-                            </div>
-                        )
-                        :
-                        <div>Нет товара</div>
-                    }
-                </div>
+                flag && <ListElement products_category_id ={products_category_id } dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState}/>
+                           
 }               
 
-                </form>
+                </div>
 
             </div>
         </>

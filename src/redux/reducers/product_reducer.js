@@ -150,10 +150,19 @@ export const createProductTest = (objImg, objProd) => {
         })
 }
 
-export const deleteProduct = (id) => {
+export const deleteProduct = (id, category_id) => {
     return (dispatch) => ProductsApi.deleteProduct(id)
         .then((res)=>{
             alert(JSON.stringify(res))
+            dispatch(products(category_id))
+        })
+}
+
+export const updateProduct = (updateObj, category_id) => {
+    return (dispatch) => ProductsApi.updateProductTest(updateObj)
+        .then((res)=>{
+            alert(JSON.stringify(res))
+            dispatch(products(category_id))
         })
 }
 
