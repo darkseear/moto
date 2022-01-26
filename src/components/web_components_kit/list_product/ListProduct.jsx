@@ -20,6 +20,8 @@ function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
             setUpdate(false)
         }
 
+        const URL = "http://xn--k1acecair0j.xn--p1ai/"
+
     return (
             <div key={item.id} className='element_products-list_element'>
                 <div className='element_products-list_element__container'>
@@ -53,19 +55,70 @@ function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
                 </div>
                 {
                     hidden && <form className='info_update_block-element_product' onSubmit={handleSubmit}>
-                        <div className="input_container-element_product">
-                            <label>Название</label>
-                            <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/>
+                    <div className='info_update_block-container'>
+                        <div className='input_update_block-container_element'>
+                            <div className="input_container-element_product">
+                                <label>Photo</label>
+                                {/* <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/> */}
+                                {
+                                    updateObj && updateObj.imgsArr.length !== 0 ?
+                                    updateObj.imgsArr.map((item, index)=><div key={item.id} >
+                                        <img src={`${URL}/${item.url}`} style={{width: '250px', height: '250px'}}></img>
+                                    </div>
+                                    )
+                                    : 
+                                    <div>
+                                        У вас не добавлены фото
+                                    </div>
+                                }
+                            </div>
+                            <div>
+                               <p>Добавить изображение</p> 
+                                <label htmlFor="photo_new" className='new_poto-list_element-list'>+</label>
+                                <input name='photo_new' id='photo_new' type="file" style={{display:"none"}}/>
+                            </div>
+                            
                         </div>
-                        <div className="input_container-element_product">
-                            <label>Производитель</label>
-                            <input value={updateObj.brand} onChange={(e)=> setUpdateObj({...updateObj, brand: e.target.value})} type="text" disabled={!update}/>
+                        <div className='input_update_block-container_element'>
+                            <label>Сведения о товаре:</label>
+                            <br />
+                            <div className="input_container-element_product">
+                                <label>Название</label>
+                                <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/>
+                            </div>
+                            <div className="input_container-element_product">
+                                <label>Производитель</label>
+                                <input value={updateObj.brand} onChange={(e)=> setUpdateObj({...updateObj, brand: e.target.value})} type="text" disabled={!update}/>
+                            </div>
+                            <div className="input_container-element_product">
+                                <label>Цена</label>
+                                <input value={updateObj.price} onChange={(e)=> setUpdateObj({...updateObj, price: e.target.value})} type="text" disabled={!update}/>
+                            </div>
+                            <div className="input_container-element_product">
+                                <label>Описание</label>
+                                <textarea value={updateObj.description} onChange={(e)=> setUpdateObj({...updateObj, description: e.target.value})} type="text" disabled={!update}/>
+                            </div>
                         </div>
-                        <div className="input_container-element_product">
-                            <label>Цена</label>
-                            <input value={updateObj.price} onChange={(e)=> setUpdateObj({...updateObj, price: e.target.value})} type="text" disabled={!update}/>
+                        <div className='input_update_block-container_element'>
+                           {
+                                updateObj && updateObj.char.length !== 0 ? 
+                                updateObj.char.map((item, index) => <div key={item.id} className="input_container-element_product">
+                                    <label>{item.name}</label>
+                                    <input value={updateObj.char[index]["value"]} onChange={(e)=> {
+                                        let obj = {...updateObj};
+                                        obj.char[index] = {...obj.char[index], ["value"]: e.target.value}
+                                        debugger
+                                        setUpdateObj(obj)
+                                        }
+                                    } type="text" disabled={!update}/>
+                                </div>)
+                                :
+                                <div>
+                                    Нет характеристик
+                                </div>
+                            }
                         </div>
-
+                    </div>
                         <button className='form_button-submit' type='submit'>Update</button>
                     </form>
                 }
