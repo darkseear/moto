@@ -62,8 +62,10 @@ function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
                                 {/* <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/> */}
                                 {
                                     updateObj && updateObj.imgsArr.length !== 0 ?
-                                    updateObj.imgsArr.map((item, index)=><div key={item.id} >
+                                    updateObj.imgsArr.map((item, index)=><div className="obramlenie_udalenie" key={item.id} >
                                         <img src={`${URL}/${item.url}`} style={{width: '250px', height: '250px'}}></img>
+                                       <div style={{display:'flex', justifyContent:'center', width:'250px', marginTop:'10px'}}><button type='button' style={{ width:'250px' }} className='form_button-submit'>Удалить </button>
+                                   </div>
                                     </div>
                                     )
                                     : 
