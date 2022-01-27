@@ -27,7 +27,7 @@ function Search({ item, setDataSearchState }){
                     Поиск
                 </div> */}
                 <div>
-                    <input placeholder='Введите имя товара для поиска...' style={{width:'100%', height:'50px', fontSize:'30px'}} type="text" value={search} onChange={(e)=> dataSearch(e.target.value)}/>
+                    <input placeholder='Введите название товара для поиска...' style={{width:'100%', height:'50px', fontSize:'30px'}} type="text" value={search} onChange={(e)=> dataSearch(e.target.value)}/>
                 </div>
             </div>
         </>
