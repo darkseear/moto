@@ -6,6 +6,34 @@ import { category } from '../../../redux/reducers/category_reducer';
 import { deleteProduct, products, updateProduct } from '../../../redux/reducers/product_reducer';
 
 
+function Search({ item, setDataSearchState }){
+
+    const [search, setSearch] = useState("");
+    
+    const dataSearch = (e) => { 
+        setSearch(e)
+        const value = e.toLowerCase(); 
+        const filter = item.filter(product => { 
+            return product.name.toLowerCase().includes(value); 
+        }); 
+        setDataSearchState(filter)
+        // update({ data: filter, active: 0, term: value }); 
+    }
+
+    return(
+        <>
+            <div className='search_conainer'>
+                {/* <div className='title_search'>
+                    Поиск
+                </div> */}
+                <div>
+                    <input placeholder='Введите имя товара для поиска...' style={{width:'100%', height:'50px', fontSize:'30px'}} type="text" value={search} onChange={(e)=> dataSearch(e.target.value)}/>
+                </div>
+            </div>
+        </>
+    )
+}
+
 function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
 
     const [hidden, setHidden] = useState(false)
@@ -24,6 +52,7 @@ function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
 
     return (
             <div key={item.id} className='element_products-list_element'>
+                
                 <div className='element_products-list_element__container'>
                                 <div>
                                     <div>{ item.name }</div>
@@ -55,6 +84,7 @@ function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
                 </div>
                 {
                     hidden && <form className='info_update_block-element_product' onSubmit={handleSubmit}>
+                        
                     <div className='info_update_block-container'>
                         <div className='input_update_block-container_element'>
                             <div className="input_container-element_product">
@@ -131,14 +161,35 @@ function ProductionListElement ({dispatch, deleteProduct, selectState, item}){
 
 function ListElement({products_category_id , dispatch, deleteProduct, selectState}){
 
+    const [dataSearchState, setDataSearchState] = useState(null);
+
+    useEffect(()=>{
+        products_category_id && 
+        products_category_id !== null && 
+        setDataSearchState(products_category_id)
+    }, [products_category_id])
+
     return(
         <>
+            <div>
+                {
+                    dataSearchState && 
+                    dataSearchState !== null &&
+                    <Search item={products_category_id} setDataSearchState={setDataSearchState}/>
+                }        
+            </div>
             <div className="list_element">
                     {
-                        products_category_id && 
-                        products_category_id !== null ?
-                        products_category_id.map((item)=> <ProductionListElement key={item.id} dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item}/>
-                        )
+                        dataSearchState && 
+                        dataSearchState !== null ?
+                        <>
+                            
+                        {    
+                            dataSearchState.map((item)=> <ProductionListElement key={item.id} dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item}/>
+                            )
+                        }
+
+                        </>
                         :
                         <div>Нет товара</div>
                     }
