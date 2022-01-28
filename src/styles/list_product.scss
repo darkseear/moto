@@ -73,6 +73,7 @@
 
 .info_update_block-container{
     display: flex;
+    flex-direction: column;
 }
 
 .input_update_block-container_element{
@@ -100,4 +101,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 200px;
+    min-height: 330px;
+}
+
+.block_photo-element_list{
+display: flex;
+}
+
+.block_input-element_list{
+display: flex;
 }
