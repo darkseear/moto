@@ -1,7 +1,7 @@
 .list_element{
     // margin-top: 50px;
     margin-bottom: 50px;
-    border: 1px solid black;
+    // border: 1px solid black;
     min-height: 50px;
     max-height: 550px;
     overflow: scroll;
@@ -111,4 +111,87 @@ display: flex;
 
 .block_input-element_list{
 display: flex;
+}
+
+.modal_container-background{
+    position: fixed;
+    background: black;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 90;
+}
+
+.modal_container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal_container-border{
+    background: white;
+    box-shadow: 0 0 10px black;
+    border-radius: 10px;
+    min-width:500px;
+    min-height: 500px;
+    z-index: 96;
+}
+
+.modal_container-close_modal{
+    width: 100%;
+    height: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    // padding-top: 20px;
+}
+
+.modal_container-close_modal_container{
+    background: rgb(97, 30, 30);
+    color: blanchedalmond;
+    width: 50px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.modal_container-close_modal_container:hover{
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+
+.modal_contaner-content{
+    padding: 20px;
+}
+
+.modal_container-edit_button{
+    background: rgb(97, 30, 30);
+    color: blanchedalmond;
+   border-radius: 10px;
+//    border:1px solid black;
+   width: auto;
+   height: 35px;
+   padding: 0 10px 0 10px;
+   margin-right: 20px;
+}
+
+.modal_container-edit_button:hover{
+    background: rgb(97, 30, 30);
+    color: blanchedalmond;
+    background: white;
+    color: black;
+    border: 1px solid black;
 }
