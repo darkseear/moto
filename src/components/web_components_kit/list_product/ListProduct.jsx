@@ -6,14 +6,22 @@ import { category } from '../../../redux/reducers/category_reducer';
 import { deleteProduct, products, updateProduct } from '../../../redux/reducers/product_reducer';
 
 
-function ModalUpdateList({ dispatch, deleteProduct, selectState, item }) {
+function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, onHiddenClick}) {
 
     const [modalOpen, setModalOpen] = useState(true)
-    const [hidden, setHidden] = useState(false)
     const [update, setUpdate] = useState(false)
     const [updateObj, setUpdateObj] = useState({ ...item })
 
     console.log(updateObj)
+
+    const [objImg, setObjImg] = useState({sendimage: null });
+
+    const handlePhotoInputChange = (e) => {
+        setObjImg({ ...objImg, sendimage: e.currentTarget.files })
+        debugger
+    }
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +33,7 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item }) {
 
     return (
         <>
-            <div onClick={() => setModalOpen(false)}>
+            <div className='button-modal_open' onClick={() => setModalOpen(false)}>
                 Развернуть
             </div>
 
@@ -39,7 +47,10 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item }) {
                                 update ? "Вкл. редактирование" :  "Выкл. редактирование" 
                             }
                         </div>
-                        <div onClick={() => setModalOpen(true)} className='modal_container-close_modal_container'>
+                        <div onClick={() => {
+                            setModalOpen(true);
+                            onHiddenClick();
+                        }} className='modal_container-close_modal_container'>
                             x
                         </div>
                     </div>
@@ -105,25 +116,32 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item }) {
                                                     {/* <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/> */}
                                                     {
                                                         updateObj && updateObj.imgsArr.length !== 0 ?
-                                                            updateObj.imgsArr.map((item, index) => <div className="obramlenie_udalenie" key={item.id} >
-                                                                <img src={`${URL}/${item.url}`} style={{ width: '250px', height: '250px' }}></img>
-                                                                <div style={{ display: 'flex', justifyContent: 'center', width: '250px', marginTop: '10px' }}><button type='button' style={{ width: '250px' }} className='form_button-submit'>Удалить </button>
+                                                                updateObj.imgsArr.map((item, index) => <div className="obramlenie_udalenie" key={item.id} >
+                                                                    <img src={`${URL}/${item.url}`} style={{ width: '250px', height: '250px' }}></img>
+                                                                    <div style={{ display: 'flex', justifyContent: 'center', width: '250px', marginTop: '10px' }}><button type='button' style={{ width: '250px' }} className='form_button-submit'>Удалить </button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            )
+                                                                )
+
                                                             :
-                                                            <div>
-                                                                У вас не добавлены фото
-                                                            </div>
-                                                    }
+
+                                                                objImg.sendimage && objImg.sendimage !== null ?
+                                                                     objImg.sendimage.map((item) =>  <div className="obramlenie_udalenie" key={Math.random()} >
+                                                                        <img style={{ width: '250px', height: '250px' }} src={URL.createObjectURL(item)} alt="" />
+                                                                    </div>
+                                                                )
+                                                                :
+                                                                <div>
+                                                                    У вас не добавлены фото
+                                                                </div>
+                                                    }      
                                                 </div>
                                             </div>
                                             <div className='input_update_block-container_element'>
 
                                                 {/* <p>Добавить изображение</p> */}
                                                 <label htmlFor="photo_new" className='new_poto-list_element-list obramlenie_udalenie'>+</label>
-                                                <input name='photo_new' id='photo_new' type="file" style={{ display: "none" }} />
-
+                                                <input name='photo_new' id='photo_new' multiple type="file" style={{ display: "none" }} onChange={handlePhotoInputChange} />
                                             </div>
                                         </div>
 
@@ -171,24 +189,17 @@ function Search({ item, setDataSearchState }) {
 
 function ProductionListElement({ dispatch, deleteProduct, selectState, item }) {
 
-    const [modalOpen, setModalOpen] = useState(true)
     const [hidden, setHidden] = useState(false)
-    const [update, setUpdate] = useState(false)
-    const [updateObj, setUpdateObj] = useState({ ...item })
 
-    console.log(updateObj)
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(updateProduct(updateObj, selectState))
-        setUpdate(false)
+    const onHiddenClick = () => {
+        setHidden(!hidden)
     }
-
+ 
     const URL = "http://xn--k1acecair0j.xn--p1ai/"
 
     return (
 
-        <div key={item.id} className='element_products-list_element'>
+        <div key={item.id} className='element_products-list_element' >
 
             <div className='element_products-list_element__container'>
                 <div>
@@ -204,9 +215,9 @@ function ProductionListElement({ dispatch, deleteProduct, selectState, item }) {
                     </div>
                 </div>
                 <div className='element-list_button'>
-                    <div className='element-list_button-hidden' onClick={() => setHidden(!hidden)}>
+                    <div className='element-list_button-hidden'>
                         {
-                            <ModalUpdateList dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item} />
+                            <ModalUpdateList hidden={hidden} onHiddenClick={onHiddenClick} dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item} />
                         }
                     </div   >
                     <div>
@@ -246,9 +257,8 @@ function ListElement({ products_category_id, dispatch, deleteProduct, selectStat
                         <>
 
                             {
-                                dataSearchState.map((item) => <>
-                                    <ProductionListElement key={item.id} dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item} />
-                                </>
+                                dataSearchState.map((item) => <ProductionListElement key={item.id} dispatch={dispatch} deleteProduct={deleteProduct} selectState={selectState} item={item} />
+                               
                                 )
                             }
 

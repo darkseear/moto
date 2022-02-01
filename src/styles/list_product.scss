@@ -45,7 +45,7 @@
 .element-list_button-hidden{
     padding-left: 10px;
     padding-right: 10px;
-    cursor: pointer;
+    // cursor: pointer;
 }
 
 .input_container-element_product{
@@ -62,7 +62,7 @@
 
 .input_container-element_product textarea{
     width: 350px;
-    height: 50px;
+    height: 150px;
     font-size: 20px;
 }
 
@@ -186,6 +186,7 @@ display: flex;
    height: 35px;
    padding: 0 10px 0 10px;
    margin-right: 20px;
+   cursor: pointer;
 }
 
 .modal_container-edit_button:hover{
@@ -194,4 +195,8 @@ display: flex;
     background: white;
     color: black;
     border: 1px solid black;
+}
+
+.button-modal_open{
+    cursor:pointer;
 }

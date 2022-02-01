@@ -158,12 +158,21 @@ export const deleteProduct = (id, category_id) => {
         })
 }
 
-export const updateProduct = (updateObj, category_id) => {
-    return (dispatch) => ProductsApi.updateProductTest(updateObj)
-        .then((res)=>{
-            alert(JSON.stringify(res))
-            dispatch(products(category_id))
-        })
+export const updateProduct = (updateObj, category_id, objImgNew, arrImgOld) => {
+
+    return (dispatch) =>  ProductsApi.uploadPrImgSome(objImgNew)
+    .then((res) => {
+        alert(JSON.stringify(res))
+        if ( res.id !== null  ) {
+            ProductsApi.updateProductTest({...updateObj, imgsArr: JSON.stringify((res.id + arrImgOld).split(',').map(parseFloat)) })
+                .then((res) => {
+                    alert(JSON.stringify(res))
+                    dispatch(products(category_id))
+                })
+        } else {
+            alert(JSON.stringify(res));
+        }
+    })
 }
 
 export const uoloadImage = (objImg) => {
