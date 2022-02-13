@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { category } from '../../../redux/reducers/category_reducer';
 import { getCharId } from '../../../redux/reducers/def_char_reducer';
 import { createProduct, createProductTest, uoloadImage } from '../../../redux/reducers/product_reducer';
+import newId from '../../../utils/newId';
 
 function CreateProductTest() {
 
@@ -29,14 +30,29 @@ function CreateProductTest() {
         dispatch(category())
     }, [])
     
-    const [objImg, setObjImg] = useState({ title: '', sendimage: null });
+    const [objImg, setObjImg] = useState({ title: '', sendimage: {} });
 
     const handlePhotoInputChange = (e) => {
-        setObjImg({ ...objImg, sendimage: e.currentTarget.files })
+        // setObjImg({ ...objImg, sendimage: e.currentTarget.files })
+        debugger
+        let countId = Object.keys(objImg.sendimage).length;
+        let newObjImg = {...objImg, sendimage:{...objImg.sendimage}};
+        
+        for(let i = 0; i < e.currentTarget.files.length; i++ ){
+            newObjImg = {...newObjImg, sendimage: {...newObjImg.sendimage, [i+countId]: e.currentTarget.files[i] }}
+        }
+        console.log(newObjImg)
+        setObjImg(newObjImg)
     }
 
     const onChengeInputObjImg = (e) => {
         setObjImg({ ...objImg, title: e.target.value })
+    }
+
+    const deleteImage = (item) => {
+        let deleteImageObj = {...objImg, sendimage: { ...objImg.sendimage}}
+        delete deleteImageObj.sendimage[item]
+        setObjImg(deleteImageObj)
     }
 
     // React.useEffect(()=>{
@@ -137,75 +153,85 @@ function CreateProductTest() {
 
                 <div className="create_product-wrapper" style={creatProd.category_id === "" ? { display:'none'} : { display:'flex'} }>
 
-                    <div className={  !objImg.title  || objImg.sendimage === null ? "form-product__img form-product_element" : "form-product__img form-product_element form-product_element-green"} style={{ display: 'flex', flexDirection: 'column' }}>
-                        <div>
-                            <div>
-                                <label htmlFor="photo" >Загрузите изображения</label>
-                                <br />
-                                <input type="file" name="photo" multiple onChange={handlePhotoInputChange} required />
+                    <div className={  !objImg.title  || objImg.sendimage === null ? "form-product__img form-product_element" : "form-product__img form-product_element form-product_element-green"} style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                        
+                           
+                            <div style={{ padding:'10px' }}>
+                                                        {/* <p>Добавить изображение</p> */}
+                                                        <label htmlFor="photo" className='new_poto-list_element-list obramlenie_udalenie' >+</label>
+                                                        <input name='photo' id='photo' multiple type="file" style={{ display: "none" }}  onChange={handlePhotoInputChange} />
+                                                    </div>
+                            
+                        
+                        <br />
+                        {
+                                                        objImg.sendimage && objImg.sendimage !== null && objImg.sendimage.length !== 0 &&
+                                                                <>
+                                                                    {
+                                                                        Object.keys(objImg.sendimage).map((item)=>  <div className="obramlenie_udalenie" key={newId()} >
+                                                                            <img style={{ width: '250px', height: '250px' }} src={objImg.sendimage ? URL.createObjectURL(objImg.sendimage[item]) : null} alt="" />
+                                                                                <br />
+                                                                            <button onClick={()=> deleteImage(item)} type='button' className='form_button-submit'>
+                                                                                Удалить 
+                                                                            </button>
+                                                                           
+                                                                        </div>)
+                                                                    } 
+                                                                        
+                                                                </>  
+                                                    } 
+                    </div>
+
+                    
+                        <div className="form-product__img form-product_element">
+                            <p>Введи сведения о товаре:</p>
+                            <br />
+                            <div className="create_category-element_flex">
+                                <label htmlFor="brand" > Бренд товара: </label>
+                                <input className="custom_input" placeholder="" name="brand" type="text" value={creatProd.brand} onChange={(e) => onChengeInputCreate(e, "brand")} required />
                             </div>
                             <br />
-                            <div>
-                                <label htmlFor="title"> Название изображения </label>
-                                <br />
-                                <input placeholder='Именование товара' className="custom_input" type="text" name="title" value={objImg.title} onChange={onChengeInputObjImg} required />
+                            <div className="create_category-element_flex">
+                                <label htmlFor="name" > Название товара: </label>
+                                <input className="custom_input" placeholder="" name="name" id="name" value={creatProd.name} onChange={(e) => onChengeInputCreate(e, "name")} required />
                             </div>
-                            {/* <div onClick={()=> handlePhoto() }>
-                                отправить только фото 
-                            </div> */}
+                            <br />
+                            <div className="create_category-element_flex">
+                                <label htmlFor="price" > Цена: </label>
+                                <input className="custom_input" placeholder="" name="price" id="price" value={creatProd.price} onChange={(e) => onChengeInputCreate(e, "price")} required />
+                            </div>
+                            <br />
+                            <div className="create_category-element_flex">
+                                <label htmlFor="description" > Описание: </label>
+                                <textarea className="custom_input" style={{ height:'70px' }}  name="description" id="description" value={creatProd.description} onChange={(e) => onChengeInputCreate(e, "description")} required />
+                            </div>
+                            <br />
                         </div>
-                        <br />
-                        <img style={{ width: '250px', height: '250px' }} src={objImg.sendimage ? URL.createObjectURL(objImg.sendimage[0]) : null} alt={objImg.sendimage ? objImg.sendimage.name : null} />
-                    </div>
 
-                    <div className="form-product__img form-product_element">
-                        <p>Введи сведения о товаре:</p>
-                        <br />
-                        <div className="create_category-element_flex">
-                            <label htmlFor="brand" > Бренд товара: </label>
-                            <input className="custom_input" placeholder="" name="brand" type="text" value={creatProd.brand} onChange={(e) => onChengeInputCreate(e, "brand")} required />
-                        </div>
-                        <br />
-                        <div className="create_category-element_flex">
-                            <label htmlFor="name" > Название товара: </label>
-                            <input className="custom_input" placeholder="" name="name" id="name" value={creatProd.name} onChange={(e) => onChengeInputCreate(e, "name")} required />
-                        </div>
-                        <br />
-                        <div className="create_category-element_flex">
-                            <label htmlFor="price" > Цена: </label>
-                            <input className="custom_input" placeholder="" name="price" id="price" value={creatProd.price} onChange={(e) => onChengeInputCreate(e, "price")} required />
-                        </div>
-                        <br />
-                        <div className="create_category-element_flex">
-                            <label htmlFor="description" > Описание: </label>
-                            <textarea className="custom_input" style={{ height:'70px' }}  name="description" id="description" value={creatProd.description} onChange={(e) => onChengeInputCreate(e, "description")} required />
-                        </div>
-                        <br />
-                    </div>
+                        <div className="form-product_element">
+                            <div>
+                                Характеристики :
+                            </div>
+                            <br />
 
-                    <div className="form-product_element">
-                        <div>
-                            Характеристики :
+                                {
+                                    creatProd.char !== null && creatProd.char &&  creatProd.char.length !== 0 ? 
+                                    
+                                    creatProd.char.map((item, index) => <div key={ Math.random()}>
+                                            <div className="create_category-element_flex">
+                                                <label htmlFor={ item.name } > { item.name } </label>
+                                            {
+                                                creatProd.char[index] && creatProd.char[index] !== undefined && creatProd.char[index] !== null && <input className="custom_input"  name={item.name} type="text" value={creatProd.char[index].value} onChange={(e) => setCreatProd({ ...creatProd, [item.name]: e.target.value})} required /> 
+                                                
+                                                }
+                                            </div>
+                                            <br />
+                                        </div> )
+                                    :
+                                    <div>Создайте характеристику</div>
+                                }
                         </div>
-                        <br />
-
-                            {
-                                creatProd.char !== null && creatProd.char &&  creatProd.char.length !== 0 ? 
-                                
-                                creatProd.char.map((item, index) => <div key={ Math.random()}>
-                                        <div className="create_category-element_flex">
-                                            <label htmlFor={ item.name } > { item.name } </label>
-                                        {
-                                            creatProd.char[index] && creatProd.char[index] !== undefined && creatProd.char[index] !== null && <input className="custom_input"  name={item.name} type="text" value={creatProd.char[index].value} onChange={(e) => setCreatProd({ ...creatProd, [item.name]: e.target.value})} required /> 
-                                            
-                                            }
-                                        </div>
-                                        <br />
-                                    </div> )
-                                 :
-                                  <div>Создайте характеристику</div>
-                            }
-                    </div>
+                   
 
                 </div>
 

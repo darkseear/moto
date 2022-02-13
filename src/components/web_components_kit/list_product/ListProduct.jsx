@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { category } from '../../../redux/reducers/category_reducer';
 import { deleteProduct, products, updateProduct } from '../../../redux/reducers/product_reducer';
+import newId from '../../../utils/newId';
 
 
 function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, onHiddenClick}) {
@@ -13,28 +14,41 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
     const [updateObj, setUpdateObj] = useState({ ...item })
 
     console.log(updateObj)
+    console.log(selectState)
 
-    const [objImg, setObjImg] = useState({sendimage: null });
+    const [objImg, setObjImg] = useState({sendimage: {} });
 
     const handlePhotoInputChange = (e) => {
-        setObjImg({ ...objImg, sendimage: e.currentTarget.files })
-        debugger
+        let countId = Object.keys(objImg.sendimage).length;
+        let newObjImg = {...objImg, sendimage:{...objImg.sendimage}};
+        
+        for(let i = 0; i < e.currentTarget.files.length; i++ ){
+            newObjImg = {...newObjImg, sendimage: {...newObjImg.sendimage, [i+countId]: e.currentTarget.files[i] }}
+        }
+        console.log(newObjImg)
+        setObjImg(newObjImg)
     }
 
-    
+    const deleteImage = (item) => {
+        let deleteImageObj = {...objImg, sendimage: { ...objImg.sendimage}}
+        delete deleteImageObj.sendimage[item]
+        setObjImg(deleteImageObj)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(updateProduct(updateObj, selectState))
+        dispatch(updateProduct(updateObj, selectState, objImg, updateObj.imgsArr))
         setUpdate(false)
     }
 
-    const URL = "http://xn--k1acecair0j.xn--p1ai/"
+    const URL_ADDRESS = "http://xn--k1acecair0j.xn--p1ai/"
 
     return (
         <>
             <div className='button-modal_open' onClick={() => setModalOpen(false)}>
-                Развернуть
+               <button type='button' className='form_button-submit'>
+                    Развернуть
+                </button>
             </div>
 
 
@@ -44,7 +58,7 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
                     <div className='modal_container-close_modal'>
                         <div onClick={()=>{ setUpdate(!update) }} className='modal_container-edit_button'>
                             { 
-                                update ? "Вкл. редактирование" :  "Выкл. редактирование" 
+                                update ? "Выкл. редактирование" :  "Вкл. редактирование" 
                             }
                         </div>
                         <div onClick={() => {
@@ -111,43 +125,51 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
                                         <div className='block_photo-element_list'>
 
                                             <div className='input_update_block-container_element'>
-                                                <div className="input_container-element_product">
+                                                <div className="input_container-element_product photo_element-list_container">
                                                     {/* <label>Photo</label> */}
                                                     {/* <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/> */}
                                                     {
-                                                        updateObj && updateObj.imgsArr.length !== 0 ?
+                                                        updateObj && updateObj.imgsArr.length !== 0 &&
                                                                 updateObj.imgsArr.map((item, index) => <div className="obramlenie_udalenie" key={item.id} >
-                                                                    <img src={`${URL}/${item.url}`} style={{ width: '250px', height: '250px' }}></img>
+                                                                    <img src={`${URL_ADDRESS}/${item.url}`} style={{ width: '250px', height: '250px' }}></img>
                                                                     <div style={{ display: 'flex', justifyContent: 'center', width: '250px', marginTop: '10px' }}><button type='button' style={{ width: '250px' }} className='form_button-submit'>Удалить </button>
                                                                     </div>
                                                                 </div>
                                                                 )
-
-                                                            :
-
-                                                                objImg.sendimage && objImg.sendimage !== null ?
-                                                                     objImg.sendimage.map((item) =>  <div className="obramlenie_udalenie" key={Math.random()} >
-                                                                        <img style={{ width: '250px', height: '250px' }} src={URL.createObjectURL(item)} alt="" />
-                                                                    </div>
-                                                                )
-                                                                :
-                                                                <div>
-                                                                    У вас не добавлены фото
-                                                                </div>
+                                                    }
+                                                    {
+                                                        objImg.sendimage && objImg.sendimage !== null && objImg.sendimage.length !== 0 &&
+                                                                <>
+                                                                    {
+                                                                        Object.keys(objImg.sendimage).map((item)=>  <div className="obramlenie_udalenie" key={newId()} >
+                                                                            <img style={{ width: '250px', height: '250px' }} src={objImg.sendimage ? URL.createObjectURL(objImg.sendimage[item]) : null} alt="" />
+                                                                            <br />
+                                                                           {update && <button onClick={()=> deleteImage(item)} type='button' className='form_button-submit'>
+                                                                                Удалить 
+                                                                            </button>}
+                                                                        </div>)
+                                                                    } 
+                                                                        
+                                                                </>  
                                                     }      
+                                                     <div style={{ padding:'10px' }}>
+                                                        {/* <p>Добавить изображение</p> */}
+                                                        <label htmlFor="photo_new" className='new_poto-list_element-list obramlenie_udalenie' >+</label>
+                                                        <input name='photo_new' id='photo_new' multiple type="file" style={{ display: "none" }} disabled={!update} onChange={handlePhotoInputChange} />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className='input_update_block-container_element'>
+                                            {/* <div className='input_update_block-container_element'> */}
 
                                                 {/* <p>Добавить изображение</p> */}
-                                                <label htmlFor="photo_new" className='new_poto-list_element-list obramlenie_udalenie'>+</label>
-                                                <input name='photo_new' id='photo_new' multiple type="file" style={{ display: "none" }} onChange={handlePhotoInputChange} />
-                                            </div>
+                                                {/* <label htmlFor="photo_new" className='new_poto-list_element-list obramlenie_udalenie'>+</label> */}
+                                                {/* <input name='photo_new' id='photo_new' multiple type="file" style={{ display: "none" }} onChange={handlePhotoInputChange} /> */}
+                                            {/* </div> */}
                                         </div>
 
 
                                     </div>
-                                    <button className='form_button-submit' type='submit'>Update</button>
+                                    <button className='form_button-submit' disabled={!update} type='submit'>Обновить товар</button>
                                 </form>
                             }
                         </div>
@@ -221,7 +243,11 @@ function ProductionListElement({ dispatch, deleteProduct, selectState, item }) {
                         }
                     </div   >
                     <div>
-                        <div onClick={() => dispatch(deleteProduct(item.id, selectState))}>Удалить (X)</div>
+                        <div onClick={() => dispatch(deleteProduct(item.id, selectState))}>
+                            <button type='button' className='form_button-submit'>
+                                Удалить
+                            </button>
+                            </div>
                     </div>
                 </div>
             </div>

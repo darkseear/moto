@@ -113,6 +113,13 @@ display: flex;
 display: flex;
 }
 
+.photo_element-list_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .modal_container-background{
     position: fixed;
     background: black;
@@ -142,7 +149,10 @@ display: flex;
     box-shadow: 0 0 10px black;
     border-radius: 10px;
     min-width:500px;
-    min-height: 500px;
+    // min-height: 500px;
+    max-width: 900px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
     z-index: 96;
 }
 
@@ -175,6 +185,7 @@ display: flex;
 
 .modal_contaner-content{
     padding: 20px;
+    height: 100%;
 }
 
 .modal_container-edit_button{
@@ -199,4 +210,10 @@ display: flex;
 
 .button-modal_open{
     cursor:pointer;
+}
+
+.content_info-modal_container{
+    overflow-y: auto;
+    height: calc(100% - 30px);
+    padding-bottom: 20px;
 }

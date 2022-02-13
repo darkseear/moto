@@ -59,13 +59,12 @@ export const ProductsApi = {
         }
 
         const photoData = new FormData();
-        // photoData.append('sendimage', objImg.sendimage, objImg.sendimage.name);
-        photoData.append('title', objImg.title);
-        for (let x = 0; x < objImg.sendimage.length; x++) {
+        objImg.title && photoData.append('title', objImg.title);
+
+        for (let x = 0; x < Object.keys(objImg.sendimage).length; x++) {
             photoData.append(`sendimage${x}`, objImg.sendimage[x], objImg.sendimage[x].name);
+            console.log(photoData)
         }
-        
-        // alert(JSON.stringify(photoData))
 
         return axios.post(API_URL + `uploadPrImgSome.php`, photoData, {...conf })
             .then((res) => {
