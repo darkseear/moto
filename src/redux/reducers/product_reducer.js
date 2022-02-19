@@ -6,7 +6,7 @@ const SALES = "SALES" // список акций
 const PRODUCTS_CATEGORI_ID = "PRODUCTS_CATEGORI_ID" // список определенной категории
 const READ_ONE = "READ_ONE" // возвращает по одному товар с выббранным ид 
 
-let initialState = {}
+let initialState = { products:{} }
 
 export const product_reducer = (state = initialState, action) => {
     switch (action.type) {
