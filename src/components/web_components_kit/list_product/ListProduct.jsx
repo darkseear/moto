@@ -37,7 +37,10 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(updateProduct(updateObj, selectState, objImg, updateObj.imgsArr))
+        let arrOldImg = []
+        updateObj.imgsArr.map((item)=>arrOldImg.push(Number(item.id)))
+        debugger
+        dispatch(updateProduct(updateObj, selectState, objImg, arrOldImg))
         setUpdate(false)
     }
 
