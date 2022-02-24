@@ -164,7 +164,7 @@ export const updateProduct = (updateObj, category_id, objImgNew, arrImgOld) => {
     .then((res) => {
         alert(JSON.stringify(res))
         if ( res.id !== null  ) {
-            debugger
+            
             ProductsApi.updateProductTest({...updateObj, imgsArr: JSON.stringify((arrImgOld.concat(res.id))) })
                 .then((res) => {
                     alert(JSON.stringify(res))

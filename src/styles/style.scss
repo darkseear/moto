@@ -120,7 +120,19 @@ body{
     width: 100%;
 }
 
-
+.delete_button{
+    background: #611e1e;
+    color: blanchedalmond;
+    width: 20px;
+    height: 20px;
+    // display: flex;
+    // justify-content: center;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 1px 5px 1px 5px;
+    margin-left: 5px;
+}
 
 @media screen and ( max-width: 1920px) {
     body{

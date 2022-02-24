@@ -12,11 +12,27 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
     const [modalOpen, setModalOpen] = useState(true)
     const [update, setUpdate] = useState(false)
     const [updateObj, setUpdateObj] = useState({ ...item })
+    const [charListProd, setCharListProd] = useState([])
+    const [selectedChar, setSelectedChar] = useState("")
 
     console.log(updateObj)
     console.log(selectState)
 
     const [objImg, setObjImg] = useState({sendimage: {} });
+    
+    const { categoryArr } = useSelector( state => state.categorys )
+    const { def_char } = useSelector( state => state.def_char )
+
+    useEffect(()=>{
+        let arr = []
+        if(def_char && def_char !== null ){
+          def_char.forEach((item)=>item.category_id === updateObj.category_id && arr.push(item) )
+          setCharListProd(arr)
+        }
+        console.log(arr)
+    },[def_char])
+
+    console.log(def_char)
 
     const handlePhotoInputChange = (e) => {
         let countId = Object.keys(objImg.sendimage).length;
@@ -29,6 +45,13 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
         setObjImg(newObjImg)
     }
 
+    const deleteImageArray = (index) => {
+        console.log(index)
+        let newArrImgs = [...updateObj.imgsArr];
+        newArrImgs.splice(index, 1)
+        setUpdateObj({...updateObj, imgsArr: newArrImgs})
+    }
+
     const deleteImage = (item) => {
         let deleteImageObj = {...objImg, sendimage: { ...objImg.sendimage}}
         delete deleteImageObj.sendimage[item]
@@ -39,7 +62,6 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
         e.preventDefault();
         let arrOldImg = []
         updateObj.imgsArr.map((item)=>arrOldImg.push(Number(item.id)))
-        debugger
         dispatch(updateProduct(updateObj, selectState, objImg, arrOldImg))
         setUpdate(false)
     }
@@ -108,7 +130,17 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
                                                 {
                                                     updateObj && updateObj.char.length !== 0 ?
                                                         updateObj.char.map((item, index) => <div key={item.id} className="input_container-element_product">
-                                                            <label>{item.name}</label>
+                                                            <div>
+                                                                 <label>{item.name}
+                                                                 {update && <span className='delete_button' onClick={()=>{
+                                                                    let arr = [...updateObj.char]
+                                                                    arr.splice(index, 1)
+                                                                    setUpdateObj({ ...updateObj, char:arr})}
+                                                                    }>X</span>
+                                                                    }
+                                                                </label>
+                                                            </div>
+                                                           
                                                             <input value={updateObj.char[index]["value"]} onChange={(e) => {
                                                                 let obj = { ...updateObj };
                                                                 obj.char[index] = { ...obj.char[index], ["value"]: e.target.value }
@@ -116,11 +148,32 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
                                                                 setUpdateObj(obj)
                                                             }
                                                             } type="text" disabled={!update} />
+                                                           
                                                         </div>)
                                                         :
                                                         <div>
                                                             Нет характеристик
                                                         </div>
+                                                }
+                                                {
+                                                    update && <>
+                                                        <select name="char" id="char" value={selectedChar} onChange={(e)=>{
+                                                            console.log(e.target.value)
+                                                            setSelectedChar(e.target.value)}
+                                                            }>
+                                                        <option value=""></option>
+                                                            {
+                                                                
+                                                                charListProd && charListProd !== null && charListProd.map((item)=><option value={item.id} key={item.id}>
+                                                                    {item.name}
+                                                                </option>)
+                                                            }
+                                                        </select>
+                                                        <button disabled={selectedChar === "" ? true : false} type='button' onClick={()=> setUpdateObj({ ...updateObj, char:[...updateObj.char].concat([charListProd.find((item)=> item.id === selectedChar)]) }) } className='form_button-submit'>
+                                                            Добавить характеристику
+                                                        </button>
+                                                    
+                                                    </>
                                                 }
                                             </div>
                                         </div>
@@ -132,10 +185,15 @@ function ModalUpdateList({ dispatch, deleteProduct, selectState, item , hidden, 
                                                     {/* <label>Photo</label> */}
                                                     {/* <input value={updateObj.name} onChange={(e)=> setUpdateObj({...updateObj, name: e.target.value})} type="text" disabled={!update}/> */}
                                                     {
-                                                        updateObj && updateObj.imgsArr.length !== 0 &&
+                                                        updateObj && updateObj.imgsArr !== null && updateObj.imgsArr.length !== 0 &&
                                                                 updateObj.imgsArr.map((item, index) => <div className="obramlenie_udalenie" key={item.id} >
                                                                     <img src={`${URL_ADDRESS}/${item.url}`} style={{ width: '250px', height: '250px' }}></img>
-                                                                    <div style={{ display: 'flex', justifyContent: 'center', width: '250px', marginTop: '10px' }}><button type='button' style={{ width: '250px' }} className='form_button-submit'>Удалить </button>
+                                                                    <div style={{ display: 'flex', justifyContent: 'center', width: '250px', marginTop: '10px' }}>
+                                                                    {
+                                                                        update &&  <button onClick={()=>deleteImageArray(index)} type='button' style={{ width: '250px' }} className='form_button-submit'>
+                                                                            Удалить 
+                                                                        </button>
+                                                                    }
                                                                     </div>
                                                                 </div>
                                                                 )
