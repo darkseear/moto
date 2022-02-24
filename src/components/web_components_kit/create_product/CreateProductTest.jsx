@@ -127,6 +127,17 @@ function CreateProductTest() {
        if(categoryState === "" || categoryState === null) setCategoryState(null)
     }, [def_char_id, def_char])
 
+    const [charListProd, setCharListProd] = useState([])
+    const [selectedChar, setSelectedChar] = useState("")
+    useEffect(()=>{
+        let arr = []
+        if(def_char && def_char !== null ){
+          def_char.forEach((item)=>item.category_id === creatProd.category_id && arr.push(item) )
+          setCharListProd(arr)
+        }
+        console.log(arr)
+    },[def_char,creatProd.category_id])
+
     return (
         <div className="create_product-container bottom_margin">
             <form className="create_product-form" onSubmit={handleSubmit} action="">
@@ -141,7 +152,7 @@ function CreateProductTest() {
                         categoryArr && categoryArr !== undefined ? <select name="category" value={creatProd.category_id} style={{ width: '310px', height: '40px', fontSize: '20px' }} onChange={(e) =>{ onChengeInputCreate(e, 'category_id');  setCategoryState(e.target.value) }} name="category" id="category" required>
                             <option value="" ></option>
                             {
-                                categoryArr.map((item) => <option value={item.id} key={Math.random()}>
+                                categoryArr.map((item) => <option value={item.id} key={ newId() }>
                                     {item.name}
                                 </option>)
                             }
@@ -217,21 +228,60 @@ function CreateProductTest() {
                                 {
                                     creatProd.char !== null && creatProd.char &&  creatProd.char.length !== 0 ? 
                                     
-                                    creatProd.char.map((item, index) => <div key={ Math.random()}>
-                                            <div className="create_category-element_flex">
-                                                <label htmlFor={ item.name } > { item.name } </label>
-                                            {
-                                                creatProd.char[index] && creatProd.char[index] !== undefined && creatProd.char[index] !== null && <input className="custom_input"  name={item.name} type="text" value={creatProd.char[index].value} onChange={(e) => setCreatProd({ ...creatProd, [item.name]: e.target.value})} required /> 
-                                                
+                                       
+                                        <div className="create_category-element_flex">
+                                                {
+                                                    
+                                                        creatProd.char.map((item, index) => <div key={item.id} className="input_container-element_product">
+                                                            <div>
+                                                                 <label>{item.name}
+                                                                  <span className='delete_button' onClick={()=>{
+                                                                    let arr = [...creatProd.char]
+                                                                    arr.splice(index, 1)
+                                                                    setCreatProd({ ...creatProd, char:arr})}
+                                                                    }>X</span>
+                                                                
+                                                                </label>
+                                                            </div>
+                                                           
+                                                            <input value={creatProd.char[index]["value"]} onChange={(e) => {
+                                                                let obj = { ...creatProd };
+                                                                obj.char[index] = { ...obj.char[index], ["value"]: e.target.value }
+                                                                debugger
+                                                                setCreatProd(obj)
+                                                            }
+                                                            } type="text"  />
+                                                           
+                                                        </div>)
+                                                       
                                                 }
-                                            </div>
-                                            <br />
-                                        </div> )
-                                    :
-                                    <div>Создайте характеристику</div>
-                                }
+                                        </div>  
+                                        :
+                                        <div>Создайте характеристику</div>
+                                    }
+                                
+                                                
+                                                     <>
+                                                        <select name="char" id="char" value={selectedChar} onChange={(e)=>{
+                                                            console.log(e.target.value)
+                                                            setSelectedChar(e.target.value)}
+                                                            }>
+                                                        <option value=""></option>
+                                                            {
+                                                                
+                                                                charListProd && charListProd !== null && charListProd.map((item)=><option value={item.id} key={item.id}>
+                                                                    {item.name}
+                                                                </option>)
+                                                            }
+                                                        </select>
+                                                        <button disabled={selectedChar === "" ? true : false} type='button' onClick={()=> setCreatProd({ ...creatProd, char:[...creatProd.char].concat([charListProd.find((item)=> item.id === selectedChar)]) }) } className='form_button-submit'>
+                                                            Добавить характеристику
+                                                        </button>
+                                                    
+                                                    </>
+                                              
+                                
                         </div>
-                   
 
                 </div>
 
