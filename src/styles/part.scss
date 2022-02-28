@@ -32,8 +32,22 @@
     font-style: normal;
     font-weight: normal;
     font-size: 21px;
-    line-height: 45px;
+    line-height: 30px;
     height: 70%;
+}
+
+.block-part_info p {
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -ms-line-clamp: 2;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    display: -webkit-box;
+    display: box;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
 }
 
 .block_part_price{
@@ -47,4 +61,18 @@
 .block-part_group-product{
     width: 100%;
     height: calc(100% - 138px);
+}
+
+.block_info-obrez {
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -ms-line-clamp: 2;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    display: -webkit-box;
+    display: box;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
 }

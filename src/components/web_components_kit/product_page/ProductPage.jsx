@@ -21,14 +21,16 @@ function ProductPage({products_category_id}) {
                 <div className="product_page-content_info">
                     <div className="content_info-product_page__container">
                         <div className="content_info-product_page_one">
-                            <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
-                            <div>
+                            <NavLink style={{ color:'black', height: '65%', display: 'block' }} to={`/read_one/${item.id}`} > 
+                            <div className='block_info-obrez'>
                                 { item.name }
                             </div>
                             </NavLink>
-                            <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
-                            <div>
-                                { item.price }
+                            <NavLink style={{ color:'black', height: '35%', display: 'block' }} to={`/read_one/${item.id}`} > 
+                            <div className='color_price-container'>
+                                { 
+                                   item.price && item.price !== "1" ?  item.price + " руб." : "Уточняйте цену"
+                                }
                             </div>
                             </NavLink>
                         </div>
