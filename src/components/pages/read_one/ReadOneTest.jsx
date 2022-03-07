@@ -7,6 +7,7 @@ import GoBackNext from '../../web_components_kit/goBack/GoBackNext'
 import PageTitle from '../../web_components_kit/page_title/PageTitle'
 import Placeholder from '../../../images/plaseholder_image.png'
 import { setCart } from '../../../redux/reducers/cart_reducer'
+import ImageGalery from '../../imageGalery/ImageGalery'
 
 function ReadOneTest() {
 
@@ -55,7 +56,7 @@ function ReadOneTest() {
                             <div style={{ width:'100%' }}>
                                 <div style={{ display:'flex', marginBottom:'30px' }}>
                                     <div style={{ marginRight:'20px', marginRight:'150px' }}>
-                                        <div style={{ fontSize:'34px', fontWeight:'bold', marginBottom:'40px' }}>
+                                        <div style={{ fontSize:'34px', fontWeight:'bold', marginBottom:'40px' , maxWidth: 'fit-content'}}>
                                             {
                                                 read_one.name
                                             } 
@@ -63,25 +64,12 @@ function ReadOneTest() {
 
                                         { 
                                             read_one.imgsArr && read_one.imgsArr[stateImg[0]] && read_one.imgsArr[stateImg[0]] !== undefined && read_one.imgsArr !== null?
-                                            <div className="photo_block-read_one">
-                                                <div className="photo_block-small_image" style={{ background:`url('${URL}/${read_one.imgsArr[stateImg[0]].url}')`}} >
-                                              
-                                                </div>
-                                                
-                                                <div style={{ display:'flex', minWidth:'50px', maxWidth:'350px', justifyContent:'space-between' }}>
-                                                    {
-                                                        read_one.imgsArr.map((item, index)=> <div key={item.id}>
-                                                           
-                                                            <div onClick={ () => setImgState([index, item.id]) } style={{ background:`url('${URL}/${item.url}')`, backgroundSize:'cover', backgroundPosition:"center", backgroundRepeat:'no-repeat' , width:'50px', height:'50px', marginRight:'15px', cursor:'pointer' }}></div>
-                                                        </div> )
-                                                    }
-                                                </div>
-                                            </div>
+                                            <ImageGalery  arrImage={read_one.imgsArr} />
                                             :
                                             <>
-                                            <div style={{ width:'350px', height:'350px', background:`url('${Placeholder}')`, backgroundSize:'contain', backgroundRepeat:'no-repeat'}} >
+                                                <div style={{ width:'350px', height:'350px', background:`url('${Placeholder}')`, backgroundSize:'contain', backgroundRepeat:'no-repeat'}} >
 
-                                            </div>
+                                                </div>
                                             </>
                                         }
                                         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center'}}>
