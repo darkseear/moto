@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 
 
-function ImageSwipeBlock({ setIndexImage, arrImage, URL, maxWidth = "325px", minWidth = "325px" }) {
+function ImageSwipeBlock({ setIndexImage, arrImage, indexImage, URL, maxWidth = "327px", minWidth = "327px" }) {
 
   const refScroll = useRef(null)
 
@@ -33,9 +33,9 @@ function ImageSwipeBlock({ setIndexImage, arrImage, URL, maxWidth = "325px", min
       </div>}
       <div ref={refScroll} style={{ display: 'flex', minWidth: minWidth, maxWidth: maxWidth, justifyContent: 'start', overflow: 'hidden' }}>
         {
-          arrImage.map((item, index) => <div className='photo_block-thumb_image' key={item.id}>
+          arrImage.map((item, index) => <div className='photo_block-thumb_image' key={item.id}  style={ indexImage !== undefined && indexImage[0] !== undefined && indexImage[0] === index ? { border:'1px solid blue', borderRadius:'10px'  } : {}}>
             <div onClick={() => setIndexImage([index, item.id])}
-              style={{ background: `url('${URL}/${item.url}')`, backgroundSize: 'cover', backgroundPosition: "center", backgroundRepeat: 'no-repeat', width: '50px', height: '50px', cursor: 'pointer' }}>
+              style={{ background: `url('${URL}/${item.url}')`, backgroundSize: 'cover', backgroundPosition: "center", backgroundRepeat: 'no-repeat', width: '50px', height: '50px', cursor: 'pointer'}}>
             </div>
           </div>)
         }

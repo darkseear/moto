@@ -21,7 +21,7 @@ function ImageModal({
           <ImageSelectedBlock  width="100%" height="100%"  arrImage={arrImage} URL={URL} indexImage={indexImage}/>
         </div>
         <div className='modal_galery-swipe' >
-          <ImageSwipeBlock arrImage={arrImage} URL={URL} setIndexImage={setIndexImage}/>
+          <ImageSwipeBlock arrImage={arrImage} URL={URL} setIndexImage={setIndexImage} indexImage={indexImage}/>
         </div>
     </div>
   )

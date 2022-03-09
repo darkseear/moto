@@ -15,7 +15,7 @@ function ImageContainer({
         <div className="photo_block-read_one">
             <ImageSelectedBlock setModalHidden={setModalHidden} arrImage={arrImage} URL={URL} indexImage={indexImage}/>
             <br />
-            <ImageSwipeBlock  arrImage={arrImage} URL={URL} setIndexImage={setIndexImage}/>
+            <ImageSwipeBlock  indexImage={indexImage} arrImage={arrImage} URL={URL} setIndexImage={setIndexImage}/>
         </div>
     )
 }
