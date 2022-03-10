@@ -22,7 +22,9 @@ function Part({ arrPart }) {
 
                   <div className="block_part_price">
                     <p>
-                      {item.price}Р
+                      { 
+                         item.price && item.price !== "1" ?  item.price + " руб." : "Уточняйте цену"
+                      }
                     </p>
                   </div>
                 </div>

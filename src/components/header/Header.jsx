@@ -14,7 +14,7 @@ function Header() {
                         <div className="adress_infoblock-left_adress"></div>
                         <div>
                             <p>
-                            г. Орёл, Московское шоссе д.95 
+                            <a href="https://yandex.ru/maps/10/orel/?from=api-maps&amp;ll=36.129317%2C52.996717&amp;origin=jsapi_2_1_75&amp;pt=%2036.128489%2C52.994166~%2036.066433%2C52.948022&amp;z=11.8">г. Орёл, Московское шоссе д.95 </a>
                             </p>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ function Header() {
                         <div className="adress_infoblock-right_adress"></div>
                         <div>
                             <p>
-                                г. Орёл, ул. МОПРА, д.7
+                               <a href="https://yandex.ru/maps/10/orel/?from=api-maps&amp;ll=36.129317%2C52.996717&amp;origin=jsapi_2_1_75&amp;pt=%2036.128489%2C52.994166~%2036.066433%2C52.948022&amp;z=11.8">г. Орёл, ул. МОПРА, д.7</a> 
                             </p>
                         </div>
                     </div>
@@ -54,7 +54,7 @@ function Header() {
                             <div className="oneRight_number-phone_phone"></div>
                             <div>
                                 <p>
-                                    +7(4862) 78-27-88
+                                    +7 (4862) 78-37-78
                                 </p>
                             </div>
                         </div>
@@ -62,7 +62,7 @@ function Header() {
                             <div className="twoRight_number-phone_phone"></div>
                             <div>
                                 <p>
-                                    +7(962) 475-27-88
+                                    +7 (962) 475-37-78
                                 </p>
                             </div>
                         </div>

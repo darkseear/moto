@@ -73,7 +73,9 @@ function ReadOneTest() {
                                             </>
                                         }
                                         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                                            <div className={"title_p__all"}> { read_one.price && <div> <p > Цена: </p> <div> {read_one.price} Р</div> </div>} </div>
+                                            <div className={"title_p__all"}> { read_one.price && <div> <p > Цена: </p> <div> { 
+                                                read_one.price && read_one.price !== "1" ?  read_one.price + " руб." : "Уточняйте цену"
+                                         }</div> </div>} </div>
                                             <div onClick={ onClickCart } className="read_one-addInCart" > 
                                                 В корзину 
                                             </div>
