@@ -15,9 +15,9 @@ const SelectSortProduct = ({ stateArr, setStateArr }) => {
     }
 
     return (
-        <select value={selectValue} style={{ width:'200px', height:'50px', fontSize:'30px' }} onChange={ onChangeSelectOptions } name="select_sort_product" id="select_sort_product">
-            <option value="name" >sort in title</option>
-            <option value="id" >sort in id</option>
+        <select value={selectValue} style={{ width:'450px', height:'50px', fontSize:'30px' }} onChange={ onChangeSelectOptions } name="select_sort_product" id="select_sort_product">
+            <option value="name" >Сортировать по названию</option>
+            <option value="category_name" >Сортировать по категории</option>
         </select>
     )
 }
