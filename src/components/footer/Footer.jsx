@@ -46,12 +46,12 @@ function Footer() {
                 </div>
                 <div className="contact-footer__phone-one">
                     <p>
-                    +7 (4862) 78-27-88
+                    +7 (4862) 78-37-78
                     </p>
                 </div>
                 <div className="contact-footer__phone-two">
                     <p>
-                    +7 (962) 475-27-88
+                    +7 (962) 475-37-78
                     </p>
                 </div>
              </div>
