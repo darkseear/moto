@@ -1,0 +1,72 @@
+.order_form{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 2500;
+    top: 0px;
+    left: 0px;
+}
+
+.order_form-container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order_form-fon{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.3;
+}
+
+.order_form-container_form{
+    min-width: 520px;
+    min-height: 800px;
+    background: white;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px;
+    position: relative;
+}
+
+.order_form-close_button{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0px 10px 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-right: 3px;
+}
+
+.order_form-title_form{
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+}
+
+.order_form-container_input_form{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.order_form_input{
+    line-height: 40px;
+    font-size: inherit;
+    border-radius: 10px;
+}
+
+.order_form_textarea{
+    font-size: inherit;
+    border-radius: 10px;
+    resize: none;
+}
