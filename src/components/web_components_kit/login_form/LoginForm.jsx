@@ -40,11 +40,11 @@ function LoginForm() {
                 <div className="login_signIn">
                     <button  type="submit">Войти</button>
                 </div>
-                <div className="login_registration">
+                {/* <div className="login_registration">
                     <Link to={"/registration"}> 
                         <button type="button">Зарегистрироваться</button> 
                     </Link>
-                </div>
+                </div> */}
             </form>
         </div>
     )
