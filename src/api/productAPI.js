@@ -2,11 +2,17 @@ import axios from "axios"
 
 // const API_URL = "http://localhost/api/product/"
     const API_URL = "http://xn--k1acecair0j.xn--p1ai/api/product/"
+    const API_URL_CART = "http://xn--k1acecair0j.xn--p1ai/api/cart/"
 
 let jwt = "";
 if (localStorage.getItem("user") && localStorage.getItem("user") !== null) jwt = JSON.parse(localStorage.getItem("user")).jwt
 
 export const ProductsApi = {
+    
+    order(order){
+        return axios.post(API_URL_CART + "makeOrder.php", order )
+    }
+    ,
     products(category_id) {
         if (category_id !== null && category_id !== undefined) {
             return axios.get(API_URL + `getProducts.php?category_id=${category_id}`)

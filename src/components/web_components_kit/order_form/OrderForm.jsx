@@ -1,11 +1,24 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { ProductsApi } from '../../../api/productAPI'
 
-function OrderForm({ cart, title_form , close}) {
+function OrderForm({ cart, title_form , close, setCart}) {
+
+    const dispatch = useDispatch()
 
     const [orderFormState, setOrderFormState] = useState({ email:"", fio:"", phone:"", comment:"",cart:cart})
 
-    function handleSubmite(e){
+    async function handleSubmite(e){
         e.preventDefault()
+        console.log(orderFormState)
+       try{ let res = await ProductsApi.order(orderFormState)
+        let data = res.data;
+        dispatch(setCart([]))
+        closeOrderForm()
+       } catch (error){
+           alert("Запрос не отправлен:" + error)
+            return error.response;
+       }
     }
 
     function closeOrderForm(){
@@ -31,24 +44,24 @@ function OrderForm({ cart, title_form , close}) {
                         {title_form}
                     </div>
                     {/* container input for rorm  */}
-                    <div className='order_form-container_input_form' >
-                        <label htmlFor="nameOrder">Имя</label>
-                        <input className='order_form_input' id="nameOrder" name="nameOrder" type="text"/>
+                    <div style={{ display:'flex', flexDirection:"column" , padding:'15px'}}>
+                        <label htmlFor="nameOrder">ФИО</label>
+                        <input value={orderFormState.fio} onChange={ (e) => setOrderFormState({...orderFormState, fio:e.target.value}) } placeholder="Фамилия Имя Отчество" id="nameOrder" name="nameOrder" type="text"/>
                         <br />
-                        <label htmlFor="firstNameOrder">Фамилия</label>
-                        <input className='order_form_input' type="text" name='firstNameOrder' id="firstNameOrder"/>
+                        {/* <label htmlFor="firstNameOrder">Фамилия</label>
+                        <input type="text" name='firstNameOrder' id="firstNameOrder"/>
                         <br />
                         <label htmlFor="lastNameOrder">Отчество</label>
-                        <input className='order_form_input' type="text" name='lastNameOrder' id='lastNameOrder' />
-                        <br />
+                        <input type="text" name='lastNameOrder' id='lastNameOrder' />
+                        <br /> */}
                         <label htmlFor="phoneOrder">Телефон</label>
-                        <input className='order_form_input' type="tel" name='phoneOrder' id='phoneOrder' />
+                        <input value={orderFormState.phone} onChange={ (e) => setOrderFormState({...orderFormState, phone:e.target.value}) } type="tel" name='phoneOrder' id='phoneOrder' />
                         <br />
                         <label htmlFor="emailOrder">Email</label>
-                        <input className='order_form_input' type="email" name='emailOrder' id='emailOrder'/>
+                        <input value={orderFormState.email} onChange={ (e) => setOrderFormState({...orderFormState, email:e.target.value}) } type="email" name='emailOrder' id='emailOrder'/>
                         <br />
                         <label htmlFor="commetOrder">Комментарий</label>
-                        <textarea className='order_form_textarea' name="commetOrder" id="commetOrder" cols="30" rows="10" style={{ resize:'none' }}></textarea>
+                        <textarea value={orderFormState.comment} onChange={ (e) => setOrderFormState({...orderFormState, comment:e.target.value}) } name="commetOrder" id="commetOrder" cols="30" rows="10" style={{ resize:'none' }}></textarea>
                         <br />
                         <button className='cart_button' type='submite'>Отправить</button>
                     </div>

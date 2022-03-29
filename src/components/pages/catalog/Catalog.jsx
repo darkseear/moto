@@ -23,6 +23,7 @@ function Catalog() {
     // }, [id])
 
     const { products_category_id } = useSelector(state => state.products)
+    const { cart } = useSelector(state => state.carts)
 
     return (
         <>
@@ -36,7 +37,7 @@ function Catalog() {
                         {products_category_id &&
                          products_category_id !== undefined &&
                          products_category_id !== null ?
-                            <ProductPage products_category_id={products_category_id} />
+                            <ProductPage products_category_id={products_category_id} cart={cart} />
                             :
                             <div>Loading...</div>
                         }

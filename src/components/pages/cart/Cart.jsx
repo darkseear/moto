@@ -36,7 +36,7 @@ function Cart() {
 
     return (
         <>
-            {openOrderForm&&<OrderForm cart={cart} title_form={"Оформление заказа"} close={openOrderFormFN}/>}
+            {openOrderForm&&<OrderForm cart={cart} title_form={"Оформление заказа"} close={openOrderFormFN} setCart={setCart}/>}
             <PageTitle  title={"Корзина"} />
             <div className="__container">
                 <div style={{ float:'left', marginRight:'10px'}}>

@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import plaseholder_image from '../../../images/plaseholder_image.png'
+import { setCart } from '../../../redux/reducers/cart_reducer'
 import CartButton_product from './CartButton_product'
 
-function ProductPage({products_category_id}) {
+function ProductPage({products_category_id, cart}) {
 
     return (
         <>
@@ -35,7 +36,9 @@ function ProductPage({products_category_id}) {
                             </NavLink>
                         </div>
                         
-                        <CartButton_product/>
+                        <CartButton_product read_one={item}
+                                            cart={cart}
+                                            setCart={setCart}/>
                         
                     </div>
                 </div>
