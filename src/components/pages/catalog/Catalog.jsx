@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
@@ -13,6 +13,35 @@ function Catalog() {
 
     const dispatch = useDispatch()
     const { id } = useParams()
+
+    const [hidden, setHidden] = useState(false)
+
+    const arrBrand = [
+        "MAKS",
+        "Altair",
+        "Forward",
+        "Stinger",
+        "RACER",
+        "Crossbike",
+        "Stailer",
+        "Stels",
+        "Stark",
+        "SAFEWEY",
+        "PULSE",
+        "Foxx",
+        "NOVATRACK",
+        "MAVERICK",
+        "Tech Team",
+        "ZIGZAG",
+        "NAMELESS",
+        "KROSTEK"
+    ]
+
+    const [stateFilter, setStateFilter] = useState({filterBrand:"", filterRama:"", filterDisk:"", filterDiametr:""})
+    
+    function filter(){
+
+    }
 
     useMemo(()=>{
         dispatch(products(id))
@@ -34,6 +63,90 @@ function Catalog() {
                         <Categories />
                     </div>
                     <div className="catalog-page_container">
+                        <div className='catalog-page_filter'>
+
+                            <div className='catalog-page_filter-title'>
+                                Фильтер
+                            </div>
+
+                            {
+                               !hidden && 
+                               <div className='catalog-page_filter-content'>
+                                   <div style={{width:'50%'}} className='catalog-page_filter-group'>
+                                        <div className='catalog-page_name-filter'>
+                                            Бренды
+                                        </div>
+                                        <div className='catalog-page_body-filter'>
+                                           {
+                                               arrBrand.map((brandName, index)=> <div 
+                                                    onClick={()=>setStateFilter({...stateFilter, filterBrand:brandName})}
+                                                    key={index} 
+                                                    style={{background:brandName === stateFilter.filterBrand && 'grey'}}
+                                                    className='catalog-page_body-filter-item'
+                                                >
+                                                   {brandName}
+                                                </div>)
+                                            }
+                                        </div>
+                                    </div>
+                                    <div className='catalog-page_filter-group'>
+                                        <div className='catalog-page_name-filter'>
+                                            Материал рамы
+                                        </div>
+                                        <div className='catalog-page_body-filter'>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #1
+                                            </div>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #2
+                                            </div>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #3
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='catalog-page_filter-group'>
+                                        <div className='catalog-page_name-filter'>
+                                            Тип тормозов
+                                        </div>
+                                        <div className='catalog-page_body-filter'>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #1
+                                            </div>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #2
+                                            </div>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #3
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='catalog-page_filter-group'>
+                                        <div className='catalog-page_name-filter'>
+                                            Диаметр колес
+                                        </div>
+                                        <div className='catalog-page_body-filter'>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #1
+                                            </div>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #2
+                                            </div>
+                                            <div className='catalog-page_body-filter-item'>
+                                                #3
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div className='catalog-page_filter-button' onClick={()=>setHidden(!hidden)}>
+                                {
+                                    hidden ? "Показать" : "Скрыть"
+                                }
+                            </div>
+
+                        </div>
                         {products_category_id &&
                          products_category_id !== undefined &&
                          products_category_id !== null ?
