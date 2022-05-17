@@ -59,7 +59,7 @@ export const products = (category_id) => {
     if (category_id) {
         return (dispatch) => ProductsApi.products(category_id).then((res) => {
             
-            console.log(res)
+            // console.log(res)
 
             if(res === null || res === undefined){
                 dispatch({

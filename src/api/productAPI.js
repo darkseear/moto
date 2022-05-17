@@ -17,7 +17,7 @@ export const ProductsApi = {
         if (category_id !== null && category_id !== undefined) {
             return axios.get(API_URL + `getProducts.php?category_id=${category_id}`)
                 .then((res) => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     return res.data
                 })
                 .catch((err)=>{
@@ -27,7 +27,7 @@ export const ProductsApi = {
         } else {
             return axios.get(API_URL + "getProducts.php")
                 .then((res) => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     return res.data
                 })
 
@@ -69,12 +69,12 @@ export const ProductsApi = {
 
         for (let x = 0; x < Object.keys(objImg.sendimage).length; x++) {
             photoData.append(`sendimage${x}`, objImg.sendimage[x], objImg.sendimage[x].name);
-            console.log(photoData)
+            // console.log(photoData)
         }
 
         return axios.post(API_URL + `uploadPrImgSome.php`, photoData, {...conf })
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 return res.data;
             })
 
@@ -95,7 +95,7 @@ export const ProductsApi = {
         console.log(objImg.sendimage.name)
         return axios.post(API_URL + `uploadPrImg.php`, photoData, {...conf })
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 return res.data;
             })
     },
@@ -110,7 +110,7 @@ export const ProductsApi = {
 
         return instance.post(API_URL + `createProduct.php`, objProd)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 return res.data;
             })
     },
@@ -125,7 +125,7 @@ export const ProductsApi = {
 
         return instance.post(API_URL + `createProductTest.php`, objProd)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 return res.data;
             })
     },
@@ -140,7 +140,7 @@ export const ProductsApi = {
 
         return instance.put(API_URL + `update.php`, objProd)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 return res.data
             })
     },
@@ -155,7 +155,7 @@ export const ProductsApi = {
 
         return instance.put(API_URL + `updateTest.php`, objProd)
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 return res.data
             })
     },
@@ -170,7 +170,7 @@ export const ProductsApi = {
 
         return instance.post(API_URL + `/delete.php`, {id:id})
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 return res.data
             })
             .catch((err)=>{

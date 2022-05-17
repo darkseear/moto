@@ -10,6 +10,7 @@ function ProductPage({products_category_id, cart}) {
     return (
         <>
         {
+            products_category_id.length > 0 ?
             products_category_id && products_category_id.map((item, index)=> <div key={item.id} className="product_page-container">
                 <NavLink style={{ color:'black' }} to={`/read_one/${item.id}`} > 
                 
@@ -43,7 +44,12 @@ function ProductPage({products_category_id, cart}) {
                     </div>
                 </div>
             </div> 
+            
             ) 
+            :
+            <div>
+                По данному запросу нет товара
+            </div>
         }
         </>
        
