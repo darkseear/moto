@@ -77,7 +77,12 @@ function Catalog() {
     const { cart } = useSelector(state => state.carts)
 
     useEffect(()=>{
+       setStateFilter(JSON.parse(localStorage.getItem("filter")))
+    },[])
+
+    useEffect(()=>{
         setStateResultFilter(products_category_id)
+        searchFilterCart()
     }, [products_category_id])
 
     useEffect(()=>{
@@ -85,6 +90,8 @@ function Catalog() {
     },[stateFilter])
 
     function searchFilterCart(){
+
+        localStorage.setItem("filter", JSON.stringify(stateFilter))
         // console.log(stateFilter, products_category_id)
         let arrResult = []
 
@@ -108,10 +115,6 @@ function Catalog() {
                     if(char.name === "Тип тормозов") charItem.disk = char.value
                 })
 
-                // console.log(stateFilter.filterDiametr)
-                // console.log(charItem.rama)
-                // console.log(String(charItem.rama.indexOf(stateFilter.filterRama))!== "-1" )
-
                 if(
                     (stateFilter.filterBrand === "Все" || item.brand === stateFilter.filterBrand) &&
                     (stateFilter.filterDiametr === "Все" || (String(charItem.diametr.indexOf(stateFilter.filterDiametr))!== "-1") ) &&
@@ -121,13 +124,9 @@ function Catalog() {
                     arrResult.push(item)
                 }
             })
-            // console.log(arrResult)
+            
             setStateResultFilter(arrResult)
         }
-    }
-
-    function filter(){
-
     }
 
     useMemo(()=>{
@@ -165,7 +164,7 @@ function Catalog() {
                                                arrBrand.map((brandName, index)=> <div 
                                                     onClick={()=>{
                                                         setStateFilter({...stateFilter, filterBrand:brandName});
-                                                        // searchFilterCart()
+                                                        
                                                     }}
                                                     key={index} 
                                                     className={brandName === stateFilter.filterBrand ? 'catalog-page_body-filter-item __active' :'catalog-page_body-filter-item'}
@@ -185,7 +184,7 @@ function Catalog() {
                                                arrRama.map((ramaName, index)=> <div 
                                                     onClick={()=>{
                                                         setStateFilter({...stateFilter, filterRama:ramaName});
-                                                        // searchFilterCart()
+                                                        
                                                     }}
                                                     key={index} 
                                                     className={ramaName === stateFilter.filterRama ? 'catalog-page_body-filter-item __active' :'catalog-page_body-filter-item'}
@@ -204,7 +203,7 @@ function Catalog() {
                                                arrDisk.map((diskName, index)=> <div 
                                                     onClick={()=>{
                                                         setStateFilter({...stateFilter, filterDisk:diskName});
-                                                        // searchFilterCart();
+                                                        
                                                     }}
                                                     key={index} 
                                                     className={diskName === stateFilter.filterDisk ? 'catalog-page_body-filter-item __active' :'catalog-page_body-filter-item'}
@@ -223,7 +222,7 @@ function Catalog() {
                                                arrDiametr.map((diametrName, index)=> <div 
                                                     onClick={()=>{
                                                         setStateFilter({...stateFilter, filterDiametr:diametrName});
-                                                        // searchFilterCart()
+                                                        
                                                     }}
                                                     key={index} 
                                                     className={diametrName === stateFilter.filterDiametr ? 'catalog-page_body-filter-item __active' :'catalog-page_body-filter-item'}
