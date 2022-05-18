@@ -173,7 +173,7 @@ function Catalog() {
                         <div className='catalog-page_filter'>
 
                             <div className='catalog-page_filter-title'>
-                                Фильтер
+                                Фильтр
                             </div>
 
                             {
