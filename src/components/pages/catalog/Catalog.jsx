@@ -15,6 +15,7 @@ function Catalog() {
     const { id } = useParams()
 
     const [hidden, setHidden] = useState(false)
+    const [stateBrand, setStateBrand] = useState(["Все"])
 
     const arrBrand = [
         "Все",
@@ -77,12 +78,32 @@ function Catalog() {
     const { cart } = useSelector(state => state.carts)
 
     useEffect(()=>{
-       setStateFilter(JSON.parse(localStorage.getItem("filter")))
+        let storageFilter = localStorage.getItem(String(id))
+        storageFilter && 
+        storageFilter !== null && 
+        setStateFilter(JSON.parse(storageFilter))
     },[])
 
     useEffect(()=>{
+
+        let charBrand = ["Все"]
+
+        products_category_id && products_category_id.forEach((item)=>{
+            
+            let findBoolean = false;    
+
+            charBrand.forEach((find)=>{
+                if(item.brand === find) findBoolean = true 
+            }) 
+            if(!findBoolean) charBrand.push(item.brand)
+        })
+
+
+        setStateBrand(charBrand)
+        
         setStateResultFilter(products_category_id)
         searchFilterCart()
+    
     }, [products_category_id])
 
     useEffect(()=>{
@@ -91,7 +112,7 @@ function Catalog() {
 
     function searchFilterCart(){
 
-        localStorage.setItem("filter", JSON.stringify(stateFilter))
+        localStorage.setItem(String(id), JSON.stringify(stateFilter))
         // console.log(stateFilter, products_category_id)
         let arrResult = []
 
@@ -118,7 +139,7 @@ function Catalog() {
                 if(
                     (stateFilter.filterBrand === "Все" || item.brand === stateFilter.filterBrand) &&
                     (stateFilter.filterDiametr === "Все" || (String(charItem.diametr.indexOf(stateFilter.filterDiametr))!== "-1") ) &&
-                    (stateFilter.filterDisk === "Все" || (stateFilter.filterDisk === "дисковый механический" ? charItem.disk === stateFilter.filterDisk || charItem.disk === "М Disc" :  stateFilter.filterDisk === "дисковый" ? charItem.disk === "Disk" || charItem.disk === stateFilter.filterDisk : charItem.disk === stateFilter.filterDisk)) && 
+                    (stateFilter.filterDisk === "Все" || (stateFilter.filterDisk === "дисковый механический" ? charItem.disk === stateFilter.filterDisk || charItem.disk === "М Disc" :  stateFilter.filterDisk === "дисковый" ? charItem.disk === "Disc" || charItem.disk === stateFilter.filterDisk : stateFilter.filterDisk ==="дисковый гидравлический" ? charItem.disk === "H Disc" || charItem.disk === stateFilter.filterDisk : charItem.disk === stateFilter.filterDisk)) && 
                     (stateFilter.filterRama === "Все" || (  (String(charItem.rama.indexOf(stateFilter.filterRama))!== "-1") || charItem.rama === stateFilter.filterRama))  
                 ){
                     arrResult.push(item)
@@ -130,7 +151,10 @@ function Catalog() {
     }
 
     useMemo(()=>{
+        setStateBrand(["Все"])
         dispatch(products(id))
+        let storageFilter = localStorage.getItem(String(id))
+        storageFilter && storageFilter !== null ? setStateFilter(JSON.parse(storageFilter)) : setStateFilter({filterBrand:"Все", filterRama:"Все", filterDisk:"Все", filterDiametr:"Все"})
     }, [id])
 
     // useEffect(() => {
@@ -161,7 +185,7 @@ function Catalog() {
                                         </div>
                                         <div className='catalog-page_body-filter'>
                                            {
-                                               arrBrand.map((brandName, index)=> <div 
+                                               stateBrand.map((brandName, index)=> <div 
                                                     onClick={()=>{
                                                         setStateFilter({...stateFilter, filterBrand:brandName});
                                                         
@@ -174,6 +198,8 @@ function Catalog() {
                                             }
                                         </div>
                                     </div>
+                                {
+                                id === "2" && <>
                                     <div className='catalog-page_filter-group'>
                                         <div className='catalog-page_name-filter'>
                                             Материал рамы
@@ -232,6 +258,8 @@ function Catalog() {
                                             }
                                         </div>
                                     </div>
+                                </>
+                                }
                                 </div>
                             }
 
